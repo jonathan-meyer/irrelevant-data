@@ -1,20 +1,23 @@
 {
-  "name": "node-handlebars-boilerplate",
+  "name": "lighthouse-aficionado",
   "version": "1.0.0",
-  "description": "Project 2 Starter",
+  "description": "Find the Lighthouse of your dreams.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
+    "dev": "nodemon server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
     "test": "npm run lint && cross-env NODE_ENV=test mocha -u tdd --reporter spec --exit"
   },
   "license": "ISC",
   "dependencies": {
+    "bootstrap": "^4.3.1",
     "dotenv": "^8.0.0",
     "express": "^4.17.0",
-    "express-handlebars": "^3.1.0",
+    "jquery": "^3.4.1",
     "mysql2": "^1.6.5",
+    "popper.js": "^1.15.0",
     "sequelize": "^5.8.6"
   },
   "devDependencies": {
@@ -25,6 +28,19 @@
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
     "mocha": "^6.1.4",
+    "nodemon": "^1.19.1",
     "prettier": "^1.17.1"
-  }
+  },
+  "directories": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jonathan-meyer/irrelevant-data.git"
+  },
+  "author": "",
+  "bugs": {
+    "url": "https://github.com/jonathan-meyer/irrelevant-data/issues"
+  },
+  "homepage": "https://lighthouse-aficionado.herokuapp.com/"
 }
