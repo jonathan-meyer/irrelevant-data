@@ -39,7 +39,7 @@ var refreshExamples = function() {
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
-        .text(example.text)
+        .text(example.name)
         .attr("href", "/example/" + example.id);
 
       var $li = $("<li>")
@@ -72,20 +72,38 @@ var handleFormSubmit = function() {
     text: "test",
     description: "description"
   };
-
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
+  if ($("#in-service input[name='in-service']").val() === "yes"){
+      var inService = true;
+  } else {
+      var inService = false;
+  }
+  var lighthouse = {
+      name: $('#name').val().trim(),
+      description: $('#description').val().trim(),
+      locationStreet: $('#street').val().trim(),
+      locationCity: $('#city').val().trim(),
+      locationState: $('#state').val().trim(),
+      locationPostalCode: parseInt($('#zip').val().trim()),
+      height: parseFloat($('#height').val()),
+      yearBuilt: parseInt($('#year-built').val().trim()),
+      inService,
+      serviceYearStart: parseInt($('#service-start').val().trim()),
+      serviceYearEnd: parseInt($('#service-end').val().trim()),
+      image: $("#picture").val().trim(),
+      locationLatitude: parseInt($("#lat").val().trim()),
+      locationLongitude: parseInt($('#long').val().trim())
   }
 
-  API.saveExample(example);
+  API.saveExample(lighthouse);
 
   $exampleText.val("");
   $exampleDescription.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
+
 // Remove the example from the db and refresh the list
+refreshExamples();
 var handleDeleteBtnClick = function() {
   var idToDelete = $(this)
     .parent()
