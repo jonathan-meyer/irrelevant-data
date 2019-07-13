@@ -13,7 +13,6 @@
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/popper.js/dist/umd/popper.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="/js/index.js"></script>
   </head>
   <body>
     <div id="home">
@@ -57,7 +56,7 @@
                     </button>
                   </div>
                   <div class="modal-body">
-                    <form class="clearfix mb-4" action="POST">
+                    <form id="new-lighthouse" class="clearfix mb-4">
                       <div class="form-group">
                         <label for="Name">Lighthouse Name</label>
                         <input
@@ -70,77 +69,120 @@
                       </div>
                       <div class="form-group">
                         <label for="description">Description</label>
-                        <textarea
+                        <input
                           class="form-control"
                           id="description"
                           aria-describedby="example-description"
                           placeholder="Enter Description"
-                        ></textarea>
+                        ></input>
                       </div>
                       <div class="form-group">
-                        <label for="location">Location</label>
-                        <textarea
+                        <label for="street">Address/PO Box</label>
+                        <input
                           class="form-control"
-                          id="location"
+                          id="street"
                           aria-describedby="example-location"
-                          placeholder="Enter Location"
-                        ></textarea>
+                          placeholder="Enter Street Address/PO Box #"
+                        ></input>
                       </div>
                       <div class="form-group">
-                        <label for="height">Height</label>
-                        <textarea
+                        <label for="city">City</label>
+                        <input
+                          class="form-control"
+                          id="city"
+                          aria-describedby="example-location"
+                          placeholder="Enter City"
+                        ></input>
+                      </div>
+                      <div class="form-group">
+                        <label for="state">State</label>
+                        <input
+                          class="form-control"
+                          id="state"
+                          aria-describedby="example-location"
+                          placeholder="Enter State"
+                        ></input>
+                      </div>
+                      <div class="form-group">
+                        <label for="zip">Postal Code</label>
+                        <input type="number"
+                          class="form-control"
+                          id="zip"
+                          aria-describedby="example-location"
+                          placeholder="Enter Postal Code"
+                        ></input>
+                      </div>
+                      <div class="form-group">
+                        <label for="lat">Latitude</label>
+                        <input type="number"
+                          class="form-control"
+                          id="lat"
+                          aria-describedby="latitude"
+                          placeholder="Enter Latitude Number"
+                        ></input>
+                      </div>
+                      <div class="form-group">
+                        <label for="long">Longitude</label>
+                        <input type="number"
+                          class="form-control"
+                          id="long"
+                          aria-describedby="longitude"
+                          placeholder="Enter Postal Code"
+                        ></input>
+                      </div>
+                      <div class="form-group">
+                        <label for="height">Height (ft)</label>
+                        <input type="number" step=".01"
                           class="form-control"
                           id="height"
                           aria-describedby="height"
-                          placeholder="Enter Height"
-                        ></textarea>
+                          placeholder="Enter Height in Feet"
+                        ></input>
                       </div>
                       <div class="form-group">
                         <label for="year-built">Year Built</label>
-                        <textarea
+                        <input type="number"
                           class="form-control"
                           id="year-built"
                           aria-describedby="year-built"
                           placeholder="Enter year it was built"
-                        ></textarea>
+                        ></input>
+                      </div>
+                      <div class="form-group" id="in-service">
+                        <div><span>In Service?</span></div>
+                        <label for="in-service-yes">Yes</label>
+                        <input type="radio" name="in-service" class="form-control" id="in-service-yes" aria-describedby="in-service" value="yes">
+                        <label for="in-service-no">No</label>
+                        <input type="radio" name="in-service" class="form-control" id="in-service-no" aria-describedby="in-service" value="no">
                       </div>
                       <div class="form-group">
-                        <label for="in-service">In Service?</label>
-                        <textarea
-                          class="form-control"
-                          id="in-service"
-                          aria-describedby="in-service"
-                          placeholder="Is the Lighthouse in service"
-                        ></textarea>
-                      </div>
-                      <div class="form-group">
-                        <label for="service-started">Service Started</label>
-                        <textarea
+                        <label for="service-start">Year Service Started</label>
+                        <input type="number"
                           class="form-control"
                           id="service-start"
                           aria-describedby="service-start"
                           placeholder="Enter Year Service Started"
-                        ></textarea>
+                        ></input>
                       </div>
                       <div class="form-group">
-                        <label for="service-ended">Service Ended</label>
-                        <textarea
+                        <label for="service-end">Year Service Ended</label>
+                        <input type="number"
                           class="form-control"
                           id="service-end"
                           aria-describedby="service-end"
                           placeholder="Enter Year Decomisioned"
-                        ></textarea>
+                        ></input>
                       </div>
                       <div class="form-group">
                         <label for="picture">Lighthouse Picture</label>
-                        <textarea
+                        <input type="text"
                           class="form-control"
                           id="picture"
                           aria-describedby="picture"
                           placeholder="Enter Lighthouse PictureURL"
-                        ></textarea>
+                        ></input>
                       </div>
-                      <button id="submit" class="btn btn-primary float-right">
+                      <button type="submit" id="submit" class="btn btn-primary float-right">
                         Submit
                       </button>
                     </form>
@@ -163,14 +205,13 @@
 
             <h3>Lighthouses in our database :</h3>
             <ul id="example-list" class="list-group">
-              <li data-id="{{ this.id }}" class="list-group-item">
-                <a href="example/{{ this.id }}">Example</a>
-                <button class="btn btn-danger float-right delete">ｘ</button>
-              </li>
+              
             </ul>
           </div>
         </div>
       </div>
     </div>
+    <script src="/js/index.js"></script>
+
   </body>
 </html>
