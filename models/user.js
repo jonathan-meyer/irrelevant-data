@@ -18,10 +18,6 @@ module.exports = function(sequelize, DataTypes) {
   User.associate = function(models) {
     // Associating User with Lighthouses
     User.hasMany(models.Lighthouse, {});
-  };
-
-  User.associate = function(models) {
-    // Associating User with favoriteLists
     User.hasMany(models.FavoriteList, {});
   };
 
