@@ -4,27 +4,31 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
-    return $.ajax({
+      console.log('API.saveExample() running');
+    $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "/api/examples",
       data: JSON.stringify(example)
+    }).then(function(){
+        refreshExamples();
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "/api/examples",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "/api/examples/" + id,
       type: "DELETE"
     });
   }
@@ -61,12 +65,12 @@ var refreshExamples = function() {
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
-  event.preventDefault();
+var handleFormSubmit = function() {
+    console.log('form submitted');
 
   var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    text: "test",
+    description: "description"
   };
 
   if (!(example.text && example.description)) {
@@ -74,9 +78,7 @@ var handleFormSubmit = function(event) {
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
-  });
+  API.saveExample(example);
 
   $exampleText.val("");
   $exampleDescription.val("");
@@ -94,6 +96,12 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+// refreshExamples();
+var lighthouse = $('#new-lighthouse');
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
+lighthouse.on("submit", function(event){
+    console.log('form submitted');
+    event.preventDefault();
+    handleFormSubmit();
+});
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
