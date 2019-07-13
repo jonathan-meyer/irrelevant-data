@@ -1,3 +1,9 @@
 .list-group-item {
   line-height: 2.5;
 }
+.app-login img {
+    max-width: 50%;
+}
+.app-login a {
+    text-decoration: none;
+}

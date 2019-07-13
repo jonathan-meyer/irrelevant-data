@@ -1,8 +1,11 @@
 // Get references to page elements
+var $lighthouse = $('#new-lighthouse');
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
+var $login = $('#login-form');
+var $register = $('#registration-form');
 
 
 // The API object contains methods for each kind of request we'll make
@@ -103,21 +106,40 @@ var handleFormSubmit = function() {
 // handleDeleteBtnClick is called when an example's delete button is clicked
 
 // Remove the example from the db and refresh the list
-refreshExamples();
 var handleDeleteBtnClick = function() {
-  var idToDelete = $(this)
+    var idToDelete = $(this)
     .parent()
     .attr("data-id");
-
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
-  });
+    
+    API.deleteExample(idToDelete).then(function() {
+        refreshExamples();
+    });
 };
 
-// refreshExamples();
-var lighthouse = $('#new-lighthouse');
+var createUser = function(user) {
+    localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
+    
+}
+
+// Get lighthouses from database on page load
+refreshExamples();
+
+// Add event listeners to the register/login forms
+$register.on('submit', function(event){
+    event.preventDefault();
+    if ($("#reg-conf-password").val().trim() !== $("#reg-password").val().trim()){
+        return alert ("Passwords must match");
+    }
+    var user = {
+        name: $('#reg-name').val().trim(),
+        email: $('#reg-email').val().trim(),
+        token: $('#reg-password').val().trim()
+    }
+    console.log(user);
+})
+
 // Add event listeners to the submit and delete buttons
-lighthouse.on("submit", function(event){
+$lighthouse.on("submit", function(event){
     console.log('form submitted');
     event.preventDefault();
     handleFormSubmit();
