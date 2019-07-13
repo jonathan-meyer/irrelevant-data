@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     locationPostalCode: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     locationLatitude: {
       type: DataTypes.DECIMAL
