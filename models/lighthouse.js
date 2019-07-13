@@ -21,7 +21,7 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING
     },
     locationPostalCode: {
-      type: DataTypes.INTEGER
+      type: DataTypes.STRING
     },
     locationLatitude: {
       type: DataTypes.DECIMAL
@@ -47,8 +47,9 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Lighthouse.associate = function(models) {
-    // Associating Lighthouse with favoriteLists
-    Lighthouse.hasMany(models.FavoriteList, {});
+    // Associating favoriteList with Lighthouses
+    FavoriteListLighthouse = sequelize.define('favoriteList_lighthouse', {});
+    Lighthouse.belongsToMany(models.FavoriteList, { through: FavoriteListLighthouse });
   };
 
   return Lighthouse;
