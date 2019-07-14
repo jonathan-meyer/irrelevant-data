@@ -34,6 +34,19 @@ var API = {
       url: "/api/examples/" + id,
       type: "DELETE"
     });
+  },
+  addUser: function(user){
+    $.ajax({
+        headers: {
+            "Content-Type": "application/json"
+        },
+        type: "POST",
+        url: "/api/user/new",
+        data: JSON.stringify(user)
+    }).then(function(response){
+        console.log(response);
+
+    })
   }
 };
 
@@ -135,6 +148,8 @@ $register.on('submit', function(event){
         email: $('#reg-email').val().trim(),
         token: $('#reg-password').val().trim()
     }
+    // createUser(user);
+    API.addUser(user);
     console.log(user);
 })
 
