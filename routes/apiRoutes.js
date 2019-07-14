@@ -28,4 +28,15 @@ module.exports = function(app) {
           res.json(results);
       })
   })
+
+  // Get users from database
+  app.get("/api/users/:email", function(req, res){
+      db.User.findAll({
+          where: {
+              email: req.params.email
+          }
+      }).then(function(results){
+          res.json(results);
+      })
+  })
 };
