@@ -19,10 +19,12 @@
       <div class="container">
           <div class="row">
               <div class="col text-right">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">
+                  <span id="username-container"></span>
+                  <button id="log-out" type="button" class="btn btn-warning">Log Out</button>
+                    <button id="log-in" type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">
                         Login
                         </button>
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#registration-modal">
+                    <button id="register" type="button" class="btn btn-primary" data-toggle="modal" data-target="#registration-modal">
                         Create User
                     </button>
               </div>
@@ -33,10 +35,11 @@
             <h2>Lighthouse Aficionado!</h2>
 
             <button
+                id="add-lh-btn"
               type="button"
               class="btn btn-primary"
               data-toggle="modal"
-              data-target="#exampleModalCenter"
+              data-target="#lighthouse-submit"
             >
               Enter a new Lighthouse!
             </button>
@@ -62,10 +65,6 @@
             </div>
             <div class="modal-body">
                 <form id="login-form" class="clearfix mb-4">
-                    <div class="form-group">
-                        <label for="reg-name">Name</label>
-                        <input class="form-control" type="text" id='username' placeholder="Enter Your Name">
-                    </div>
                     <div class="form-group">
                         <label for="email">Email</label>
                         <input class="form-control" type="email" id='email' placeholder="Enter Email Address">
@@ -98,10 +97,6 @@
                         </a>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
             </div>
         </div>
     </div>
@@ -160,21 +155,17 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
-            </div>
         </div>
     </div>
 </div>
 
 <!-- Submit Lighthouse Modal -->
-<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+<div class="modal fade" id="lighthouse-submit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalCenterTitle">
-                    Modal title
+                    Add a New Lighthouse
                 </h5>
                 <button
                     type="button"
@@ -312,7 +303,7 @@
                         placeholder="Enter Lighthouse PictureURL"
                     ></input>
                     </div>
-                    <button type="submit" id="submit" class="btn btn-primary float-right" data-dismiss="modal">
+                    <button type="submit" id="submit" class="btn btn-primary float-right" >
                     Submit
                     </button>
                 </form>

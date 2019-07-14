@@ -1,4 +1,5 @@
 // Get references to page elements
+var $lhWrapper = $('#lighthouse-submit');
 var $lighthouse = $('#new-lighthouse');
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
@@ -7,20 +8,17 @@ var $exampleList = $("#example-list");
 var $login = $('#login-form');
 var $register = $('#registration-form');
 
-
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
       console.log('API.saveExample() running');
-    $.ajax({
+    return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
       url: "/api/examples",
       data: JSON.stringify(example)
-    }).then(function(){
-        refreshExamples();
     });
   },
   getExamples: function() {
@@ -47,6 +45,12 @@ var API = {
         console.log(response);
 
     })
+  },
+  getUsers: function(email){
+    return $.ajax({
+        url: "/api/users/" + email,
+        type: "GET"
+    });
   }
 };
 
@@ -110,10 +114,11 @@ var handleFormSubmit = function() {
       locationLongitude: parseInt($('#long').val().trim())
   }
 
-  API.saveExample(lighthouse);
+  API.saveExample(lighthouse).then(function(){
+    refreshExamples();
+    $lhWrapper.modal('hide');
+});
 
-  $exampleText.val("");
-  $exampleDescription.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -129,14 +134,43 @@ var handleDeleteBtnClick = function() {
     });
 };
 
-var createUser = function(user) {
-    localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
-    
+function isUserInDatabase(user){
+    API.getUsers(user.email).then(function(response){
+        for (i=0;i<response.length;i++){
+            if (user.email === response[i].email && user.token === response[i].token){
+                isUser = true;
+                console.log(response[i]);
+                $('#username-container').text(`Hello, ${response[i].name}`);
+                $('body').addClass('aficionado');
+                $('body').removeClass('no-aficionado');
+                localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
+            } else {
+                console.log('user not in database');
+                alert("We're sorry, the username or password you entered was incorrect.");
+            }
+        }
+    });
+}
+
+function checkUser(){
+    if (localStorage.getItem('lighthouseAffUser')){
+        user = JSON.parse(localStorage.getItem('lighthouseAffUser'));
+        console.log(localStorage.getItem('lighthouseAffUser'));
+        console.log(typeof JSON.parse(localStorage.getItem('lighthouseAffUser')));
+        isUserInDatabase(user);
+        return true
+    } else {
+        console.log(false);
+        $('#username-container').text('');
+        $("body").addClass('no-aficionado');
+        $('body').removeClass('aficionado');
+        return false;
+    }
 }
 
 // Get lighthouses from database on page load
 refreshExamples();
-
+checkUser();
 // Add event listeners to the register/login forms
 $register.on('submit', function(event){
     event.preventDefault();
@@ -148,9 +182,21 @@ $register.on('submit', function(event){
         email: $('#reg-email').val().trim(),
         token: $('#reg-password').val().trim()
     }
-    // createUser(user);
+    localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
     API.addUser(user);
     console.log(user);
+    checkUser();
+})
+
+$login.on('submit', function(event){
+    event.preventDefault();
+    var user = {
+        email: $('#email').val().trim(),
+        token: $('#password').val().trim()
+    }
+    isUserInDatabase(user)
+    $("#login-modal").modal('hide');
+
 })
 
 // Add event listeners to the submit and delete buttons
@@ -160,3 +206,8 @@ $lighthouse.on("submit", function(event){
     handleFormSubmit();
 });
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+$('#log-out').on('click',function(){
+    localStorage.removeItem('lighthouseAffUser');
+    checkUser();
+})

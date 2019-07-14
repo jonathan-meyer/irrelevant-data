@@ -7,3 +7,12 @@
 .app-login a {
     text-decoration: none;
 }
+.no-aficionado #add-lh-btn, .no-aficionado #log-out {
+    display: none;
+}
+.aficionado #log-out {
+    display: inline;
+}
+.aficionado #log-in, .aficionado #register {
+    display: none;
+} 
