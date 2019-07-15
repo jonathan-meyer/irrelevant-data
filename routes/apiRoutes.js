@@ -21,4 +21,22 @@ module.exports = function(app) {
       res.json(dbExample);
     });
   });
+
+  // Add a user to the database
+  app.post("/api/user/new", function(req, res){
+      db.User.create(req.body).then(function(results){
+          res.json(results);
+      })
+  })
+
+  // Get users from database
+  app.get("/api/users/:email", function(req, res){
+      db.User.findAll({
+          where: {
+              email: req.params.email
+          }
+      }).then(function(results){
+          res.json(results);
+      })
+  })
 };
