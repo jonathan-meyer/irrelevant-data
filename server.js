@@ -1,19 +1,30 @@
 require("dotenv").config();
-var express = require("express");
 
-// Requiring our models for syncing
-var db = require("./models");
+const express = require("express");
+const passport = require("passport");
+const session = require("express-session");
 
-// Sets up the Express App
-var app = express();
-var PORT = process.env.PORT || 3000;
+const db = require("./models");
+
+const app = express();
+const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(express.static("public"));
+app.use(
+  session({
+    secret: "house-light",
+    resave: false,
+    saveUninitialized: true
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
 
 // Routes
+require("./routes/loginRoutes")(app);
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
 

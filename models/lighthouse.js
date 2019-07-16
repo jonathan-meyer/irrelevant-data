@@ -47,9 +47,12 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Lighthouse.associate = function(models) {
-    // Associating favoriteList with Lighthouses
-    FavoriteListLighthouse = sequelize.define('favoriteList_lighthouse', {});
-    Lighthouse.belongsToMany(models.FavoriteList, { through: FavoriteListLighthouse });
+    Lighthouse.belongsToMany(models.FavoriteList, {
+      through: "LighthouseFavoriteList"
+    });
+    models.FavoriteList.belongsToMany(Lighthouse, {
+      through: "LighthouseFavoriteList"
+    });
   };
 
   return Lighthouse;

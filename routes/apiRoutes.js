@@ -3,6 +3,7 @@ var db = require("../models");
 // Lighthouse
 // =============================================================
 module.exports = function(app) {
+
   // Get all lighthouses
   app.get("/api/lighthouses", function(req, res) {
     db.Lighthouse.findAll({}).then(function(dbLighthouses) {
@@ -95,6 +96,25 @@ module.exports = function(app) {
   app.delete("/api/users/:id", function(req, res) {
     db.User.destroy({ where: { id: req.params.id } }).then(function(dbUsers) {
       res.json(dbUsers);
+
     });
   });
+
+  // Add a user to the database
+  app.post("/api/user/new", function(req, res){
+      db.User.create(req.body).then(function(results){
+          res.json(results);
+      })
+  })
+
+  // Get users from database
+  app.get("/api/users/:email", function(req, res){
+      db.User.findAll({
+          where: {
+              email: req.params.email
+          }
+      }).then(function(results){
+          res.json(results);
+      })
+  })
 };
