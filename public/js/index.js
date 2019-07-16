@@ -135,9 +135,15 @@ var handleDeleteBtnClick = function() {
 };
 
 function isUserInDatabase(user){
+    console.log('running isUserInDatabase()');
     API.getUsers(user.email).then(function(response){
+        console.log(response);
+        if (response.length === 0){
+            $('body').addClass('no-aficionado');
+        }
         for (i=0;i<response.length;i++){
             if (user.email === response[i].email && user.token === response[i].token){
+                console.log("User matched");
                 isUser = true;
                 console.log(response[i]);
                 $('#username-container').text(`Hello, ${response[i].name}`);
@@ -158,7 +164,6 @@ function checkUser(){
         console.log(localStorage.getItem('lighthouseAffUser'));
         console.log(typeof JSON.parse(localStorage.getItem('lighthouseAffUser')));
         isUserInDatabase(user);
-        return true
     } else {
         console.log(false);
         $('#username-container').text('');
@@ -182,10 +187,12 @@ $register.on('submit', function(event){
         email: $('#reg-email').val().trim(),
         token: $('#reg-password').val().trim()
     }
+    $('#registration-modal').modal('hide');
     localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
     API.addUser(user);
     console.log(user);
     checkUser();
+
 })
 
 $login.on('submit', function(event){
