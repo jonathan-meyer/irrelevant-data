@@ -1,7 +1,9 @@
+// Dependencies
 const path = require("path");
 const express = require("express");
 
 module.exports = function(app) {
+
   app.use("/jquery", express.static(path.resolve("node_modules", "jquery")));
   app.use(
     "/popper.js",
