@@ -36,11 +36,9 @@ module.exports = function(app) {
       res.json(dbLighthouses);
     });
   });
-};
 
 // FavoriteList
 // =============================================================
-module.exports = function(app) {
   // Get all favoriteLists
   app.get("/api/favoriteLists", function(req, res) {
     db.FavoriteList.findAll({}).then(function(dbFavoriteLists) {
@@ -73,11 +71,9 @@ module.exports = function(app) {
       res.json(dbFavoriteList);
     });
   });
-};
 
 // User
 // =============================================================
-module.exports = function(app) {
   // Get all users
   app.get("/api/users", function(req, res) {
     db.User.findAll({}).then(function(dbUsers) {
