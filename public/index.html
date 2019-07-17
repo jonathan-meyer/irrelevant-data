@@ -186,6 +186,7 @@
                         class="form-control"
                         aria-describedby="example-text"
                         placeholder="Enter Lighthouse Name"
+                        required="true"
                     />
                     </div>
                     <div class="form-group">
@@ -269,13 +270,20 @@
                         placeholder="Enter year it was built"
                     ></input>
                     </div>
+
                     <div class="form-group" id="in-service">
                     <div><span>In Service?</span></div>
-                    <label for="in-service-yes">Yes</label>
-                    <input type="radio" name="in-service" class="form-control" id="in-service-yes" aria-describedby="in-service" value="yes">
-                    <label for="in-service-no">No</label>
-                    <input type="radio" name="in-service" class="form-control" id="in-service-no" aria-describedby="in-service" value="no">
+                    <select class="form-control"
+                    id="in-service" 
+                    aria-describedby="in-service"
+                    placeholder="None" 
+                    required="true">
+                        <option value=""></option>
+                        <option value="yes">Yes</option>
+                        <option value="no">No</option>
+                      </select>
                     </div>
+
                     <div class="form-group">
                     <label for="service-start">Year Service Started</label>
                     <input type="number"
