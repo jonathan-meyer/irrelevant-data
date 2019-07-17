@@ -9,7 +9,7 @@ passport.use(
     {
       clientID: process.env.FACEBOOK_APP_ID,
       clientSecret: process.env.FACEBOOK_APP_SECRET,
-      callbackURL: "/auth/fb/callback"
+      callbackURL: "/auth/facebook/callback"
     },
     (accessToken, refreshToken, profile, cb) => {
       // todo: get user from the database or create a new record
@@ -41,12 +41,13 @@ passport.deserializeUser((user, done) => {
 
 module.exports = function(app) {
   app.get("/auth/fb", passport.authenticate("facebook"));
+  app.get("/auth/facebook", passport.authenticate("facebook"));
 
   app.get(
-    "/auth/fb/callback",
+    "/auth/facebook/callback",
     passport.authenticate("facebook", {
-      successRedirect: "/login.html",
-      failureRedirect: "/login.html"
+      successRedirect: process.env.LANDING_PAGE || "/",
+      failureRedirect: process.env.LOGIN_PAGE || "/"
     })
   );
 
@@ -54,9 +55,5 @@ module.exports = function(app) {
     user === undefined
       ? res.status(401).json({ 401: "Unauthorized" })
       : res.json(user);
-  });
-
-  app.post("/auth/user", (req, res) => {
-    res.status(501).json({ 501: "Not Implemented" });
   });
 };
