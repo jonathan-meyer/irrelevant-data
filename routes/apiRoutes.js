@@ -1,8 +1,8 @@
 var db = require("../models");
 
-// Lighthouse
-// =============================================================
 module.exports = function(app) {
+  // Lighthouse
+  // =============================================================
 
   // Get all lighthouses
   app.get("/api/lighthouses", function(req, res) {
@@ -32,13 +32,16 @@ module.exports = function(app) {
 
   // Delete a lightouse by id
   app.delete("/api/lighthouses/:id", function(req, res) {
-    db.Lighthouse.destroy({ where: { id: req.params.id } }).then(function(dbLighthouses) {
+    db.Lighthouse.destroy({ where: { id: req.params.id } }).then(function(
+      dbLighthouses
+    ) {
       res.json(dbLighthouses);
     });
   });
 
-// FavoriteList
-// =============================================================
+  // FavoriteList
+  // =============================================================
+
   // Get all favoriteLists
   app.get("/api/favoriteLists", function(req, res) {
     db.FavoriteList.findAll({}).then(function(dbFavoriteLists) {
@@ -67,13 +70,16 @@ module.exports = function(app) {
 
   // Delete a FavoriteList by id
   app.delete("/api/favoriteLists/:id", function(req, res) {
-    db.FavoriteList.destroy({ where: { id: req.params.id } }).then(function(dbFavoriteList) {
+    db.FavoriteList.destroy({ where: { id: req.params.id } }).then(function(
+      dbFavoriteList
+    ) {
       res.json(dbFavoriteList);
     });
   });
 
-// User
-// =============================================================
+  // User
+  // =============================================================
+
   // Get all users
   app.get("/api/users", function(req, res) {
     db.User.findAll({}).then(function(dbUsers) {
@@ -92,25 +98,24 @@ module.exports = function(app) {
   app.delete("/api/users/:id", function(req, res) {
     db.User.destroy({ where: { id: req.params.id } }).then(function(dbUsers) {
       res.json(dbUsers);
-
     });
   });
 
   // Add a user to the database
-  app.post("/api/user/new", function(req, res){
-      db.User.create(req.body).then(function(results){
-          res.json(results);
-      })
-  })
+  app.post("/api/user/new", function(req, res) {
+    db.User.create(req.body).then(function(results) {
+      res.json(results);
+    });
+  });
 
   // Get users from database
-  app.get("/api/users/:email", function(req, res){
-      db.User.findAll({
-          where: {
-              email: req.params.email
-          }
-      }).then(function(results){
-          res.json(results);
-      })
-  })
+  app.get("/api/users/:email", function(req, res) {
+    db.User.findAll({
+      where: {
+        email: req.params.email
+      }
+    }).then(function(results) {
+      res.json(results);
+    });
+  });
 };
