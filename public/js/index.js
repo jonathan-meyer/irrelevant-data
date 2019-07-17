@@ -17,19 +17,19 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "/api/examples",
+      url: "/api/lighthouses",
       data: JSON.stringify(example)
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "/api/examples",
+      url: "/api/lighthouses",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "/api/examples/" + id,
+      url: "/api/lighthouses/" + id,
       type: "DELETE"
     });
   },
@@ -51,6 +51,12 @@ var API = {
         url: "/api/users/" + email,
         type: "GET"
     });
+  },
+  getUser: function(){
+      return $.ajax({
+          url: "/auth/user",
+          type: "GET"
+      });
   }
 };
 
@@ -156,6 +162,9 @@ function isUserInDatabase(user){
             }
         }
     });
+    API.getUser().then(function(response){
+        console.log(response);
+    })
 }
 
 function checkUser(){
@@ -173,9 +182,19 @@ function checkUser(){
     }
 }
 
+function initSlider(target, options){
+    $(target).slick(options);
+}
 // Get lighthouses from database on page load
 refreshExamples();
 checkUser();
+initSlider("#lighthouses", {
+    autoplay: true,
+    prevArrow: ".prev-wrapper",
+    nextArrow: ".next-wrapper",
+    slidesToShow: 2,
+    infinite: true
+});
 // Add event listeners to the register/login forms
 $register.on('submit', function(event){
     event.preventDefault();
