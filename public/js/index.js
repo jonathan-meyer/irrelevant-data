@@ -54,7 +54,7 @@ var API = {
   },
   getUser: function(){
       return $.ajax({
-          url: "/auth/fb",
+          url: "/auth/user",
           type: "GET"
       });
   }
