@@ -13,6 +13,8 @@
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/popper.js/dist/umd/popper.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   </head>
   <body>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -86,6 +88,63 @@
               Enter a new Lighthouse!
             </button>
             
+            <h3>Lighthouses in our database :</h3>
+            <div id="lighthouse-wrapper">
+                <div class="prev-wrapper">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
+                <div id="lighthouses">
+                    <div class="card" style="width: 18rem;">
+                        <div class="favorite">
+                                <i class="far fa-plus-square"></i>
+                        </div>
+                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/hangman.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="favorite">
+                                <i class="far fa-plus-square"></i>
+                        </div>
+                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/starWars.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="favorite">
+                                <i class="far fa-plus-square"></i>
+                        </div>
+                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/giphy.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                    </div>
+                    <div class="card" style="width: 18rem;">
+                        <div class="favorite">
+                                <i class="far fa-plus-square"></i>
+                        </div>
+                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/trivia.png" alt="Card image cap">
+                        <div class="card-body">
+                            <h5 class="card-title">Card title</h5>
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                            
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="next-wrapper">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
+            </div>
+            <ul id="example-list" class="list-group">
             <h3 id="database-head">Favorite lighthouses :</h3>
             <ul id="fav-list" class="list group">
 
@@ -373,6 +432,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/js/index.js"></script>
 
   </body>

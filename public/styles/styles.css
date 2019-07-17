@@ -56,4 +56,42 @@ body {
 .aficionado #log-in, .aficionado #register {
     display: none;
 } 
+#lighthouses {
+    display: flex;
+}
+#lighthouses .card {
+    position: relative;
+}
+#lighthouses .favorite {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    opacity: 0;
+    transition: opacity .5s ease;
+}
+#lighthouses .card:hover .favorite {
+    opacity: 1;
+}
+.card .favorite:hover {
+    cursor: pointer;
+}
+#lighthouse-wrapper .prev-wrapper, #lighthouse-wrapper .next-wrapper {
+    position: absolute;
+    top: 50%;
+    height: 30px;
+    margin-top: -15px;
+    z-index: 1;
+    font-size: 35px;
+    color: #fff;
+    padding: 0 5px;
+}
+.prev-wrapper:hover, .next-wrapper:hover {
+    cursor: pointer;
+}
+#lighthouse-wrapper .prev-wrapper {
+    left: 15px;
+}
+#lighthouse-wrapper .next-wrapper {
+    right: 15px;
+}
 
