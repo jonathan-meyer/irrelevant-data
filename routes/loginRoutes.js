@@ -1,7 +1,7 @@
 const passport = require("passport");
 const FacebookStrategy = require("passport-facebook").Strategy;
 
-//const db = require("../models");
+const db = require("../models");
 
 // Facebook
 passport.use(
@@ -19,12 +19,23 @@ passport.use(
 );
 
 passport.serializeUser((user, done) => {
-  console.log("serializeUser", { user });
-  done(null, user);
+  db.User.findOrCreate({
+    where: { token: user.id },
+    defaults: {
+      name: user.displayName,
+      provider: user.provider,
+      token: user.id
+    }
+  })
+    .then(([user, created]) => {
+      done(null, user);
+    })
+    .catch(err => {
+      done(err, null);
+    });
 });
 
 passport.deserializeUser((user, done) => {
-  console.log("deserializeUser", { user });
   done(null, user);
 });
 
@@ -34,8 +45,18 @@ module.exports = function(app) {
   app.get(
     "/auth/fb/callback",
     passport.authenticate("facebook", {
-      successRedirect: "/",
+      successRedirect: "/login.html",
       failureRedirect: "/login.html"
     })
   );
+
+  app.get("/auth/user", ({ user }, res) => {
+    user === undefined
+      ? res.status(401).json({ 401: "Unauthorized" })
+      : res.json(user);
+  });
+
+  app.post("/auth/user", (req, res) => {
+    res.status(501).json({ 501: "Not Implemented" });
+  });
 };
