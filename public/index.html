@@ -15,24 +15,66 @@
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div>
+        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#login-modal" aria-controls="" aria-expanded="false" aria-label="">
+            <span>Login</span>
+        </button>
+        </div>
+        <div>
+        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#registration-modal" aria-controls="" aria-expanded="false" aria-label="">
+            <span >Create User</span>
+        </button>
+        </div>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Dropdown
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+            </li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            </form>
+        </div>
+        </nav>     
     <div id="home">
       <div class="container">
-          <div class="row">
-              <div class="col text-right">
-                  <span id="username-container"></span>
-                  <button id="log-out" type="button" class="btn btn-warning">Log Out</button>
-                    <button id="log-in" type="button" class="btn btn-primary" data-toggle="modal" data-target="#login-modal">
-                        Login
-                        </button>
-                    <button id="register" type="button" class="btn btn-primary" data-toggle="modal" data-target="#registration-modal">
-                        Create User
-                    </button>
-              </div>
-          </div>
+        <div class="row">
+            <div class="col-8 offset-2">
+            <div class="jumbotron jumbotron-fluid">
+                <div class="container">
+                    <h1 class="display-4">Lighthouse Afficionado</h1>
+                    <p class="lead">The one stop shop for all things lighthouses! Share your favorits and explore new lights.</p>
+                </div>
+            </div> 
+            </div>
+        </div>   
+        
         <div class="row">
           <div class="col-8 offset-2">
             <h1 id="msg"></h1>
-            <h2>Lighthouse Aficionado!</h2>
+            <h2 id="header">Lighthouse Database</h2>
+            <ul id="example-list" class="list-group">
+                
+            </ul>
 
             <button
                 id="add-lh-btn"
@@ -44,9 +86,9 @@
               Enter a new Lighthouse!
             </button>
             
-            <h3>Lighthouses in our database :</h3>
-            <ul id="example-list" class="list-group">
-                
+            <h3 id="database-head">Favorite lighthouses :</h3>
+            <ul id="fav-list" class="list group">
+
             </ul>
         </div>
     </div>
