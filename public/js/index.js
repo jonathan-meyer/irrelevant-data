@@ -4,7 +4,7 @@ var $lighthouse = $('#new-lighthouse');
 var $exampleText = $("#example-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $lighthouses = $("#lighthouses");
 var $login = $('#login-form');
 var $register = $('#registration-form');
 
@@ -54,7 +54,7 @@ var API = {
   },
   getUser: function(){
       return $.ajax({
-          url: "/auth/user",
+          url: "/auth/fb",
           type: "GET"
       });
   }
@@ -62,30 +62,44 @@ var API = {
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
+    if ($("#lighthouses.slick-slider").length){
+        initSlider('#lighthouses','unslick');
+        console.log('#lighthouses unslicked');
+    }
+    // initSlider('#lighthouses',"unslick");
   API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
-      var $a = $("<a>")
-        .text(example.name)
-        .attr("href", "/example/" + example.id);
-
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
+      var $examples = data.map(function(example) {
+      var $title = $("<h2>").text(example.name).attr("href", "/lighthouse/" + example.id).attr('class','text-center lh-title');
+      var $lhImage = $('<img>').attr('src', example.image).addClass('card-img-top').attr('alt', example.name);
+      var $lhDesc = $('<p>').attr('class','lh-desc text-center').text(example.description);
+      var yearBuilt =  $('<li>').attr('class','lh-spec year-built').text("Year built: " + example.yearBuilt);
+      var serviceYearStart = $('<li>').attr('class','lh-spec service-start').text("First year in service: " + example.serviceYearStart);
+      var serviceYearEnd = $('<li>').attr('class','lh-spec service-end').text("Year decommissioned: " + example.serviceYearEnd);
+      var height = $('<li>').attr('class','lh-spec height').text("Height: " + example.height + "ft.");
+      var state = $('<li>').attr('class','lh-spec state').text("State/Country: " + example.locationState);
+      var specs = $('<ul>').attr('class','specs').append(state).append(height).append(yearBuilt).append(serviceYearStart).append(serviceYearEnd);
+      var $card = $("<div>").attr({
+          class: "card",
           "data-id": example.id
-        })
-        .append($a);
+        }).append($lhImage).append($title).append($lhDesc).append(specs);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+      var $button = $("<button>").addClass("btn btn-danger float-right delete").text("ｘ");
+      var $cardWrapper = $('<a>');
+      $card.append($button);
+      $cardWrapper.append($card);
 
-      $li.append($button);
-
-      return $li;
+      return $card;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $lighthouses.empty();
+    $lighthouses.append($examples);
+    initSlider("#lighthouses", {
+        autoplay: false,
+        prevArrow: ".prev-wrapper",
+        nextArrow: ".next-wrapper",
+        slidesToShow: 1,
+        infinite: true
+    });
   });
 };
 
@@ -188,13 +202,7 @@ function initSlider(target, options){
 // Get lighthouses from database on page load
 refreshExamples();
 checkUser();
-initSlider("#lighthouses", {
-    autoplay: true,
-    prevArrow: ".prev-wrapper",
-    nextArrow: ".next-wrapper",
-    slidesToShow: 2,
-    infinite: true
-});
+
 // Add event listeners to the register/login forms
 $register.on('submit', function(event){
     event.preventDefault();
@@ -231,7 +239,7 @@ $lighthouse.on("submit", function(event){
     event.preventDefault();
     handleFormSubmit();
 });
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
 $('#log-out').on('click',function(){
     localStorage.removeItem('lighthouseAffUser');
