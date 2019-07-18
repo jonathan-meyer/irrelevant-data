@@ -75,6 +75,14 @@ body {
 .card .favorite:hover {
     cursor: pointer;
 }
+.card .favorite i {
+    color: #000;
+    background: #fff;
+    padding: 1px;
+    padding: 2px 0 0 3px;
+    padding-right: 2px;
+    padding-bottom: 1px;
+}
 #lighthouse-wrapper .prev-wrapper, #lighthouse-wrapper .next-wrapper {
     position: absolute;
     top: 50%;
