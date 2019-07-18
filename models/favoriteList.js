@@ -7,12 +7,12 @@ module.exports = function(sequelize, DataTypes) {
     },
     description: {
       type: DataTypes.TEXT
-    },
-    owner: {
-      type: DataTypes.STRING,
-      allowNull: false
     }
   });
+
+  FavoriteList.associate = function(models) {
+    FavoriteList.belongsTo(models.User);
+  };
 
   return FavoriteList;
 };
