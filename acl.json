@@ -1,0 +1,32 @@
+[
+  {
+    "group": "guest",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "deny"
+      }
+    ]
+  },
+  {
+    "group": "facebook",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "google",
+    "permissions": [
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  }
+]
