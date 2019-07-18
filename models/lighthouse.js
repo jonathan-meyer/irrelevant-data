@@ -47,6 +47,7 @@ module.exports = function(sequelize, DataTypes) {
   });
 
   Lighthouse.associate = function(models) {
+    Lighthouse.belongsTo(models.User);
     Lighthouse.belongsToMany(models.FavoriteList, {
       through: "LighthouseFavoriteList"
     });
