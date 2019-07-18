@@ -3,6 +3,11 @@
     "group": "guest",
     "permissions": [
       {
+        "resource": "lighthouses",
+        "methods": ["GET"],
+        "action": "allow"
+      },
+      {
         "resource": "*",
         "methods": "*",
         "action": "deny"
@@ -10,17 +15,7 @@
     ]
   },
   {
-    "group": "facebook",
-    "permissions": [
-      {
-        "resource": "*",
-        "methods": "*",
-        "action": "allow"
-      }
-    ]
-  },
-  {
-    "group": "google",
+    "group": "user",
     "permissions": [
       {
         "resource": "*",

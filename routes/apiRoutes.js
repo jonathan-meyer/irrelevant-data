@@ -7,7 +7,7 @@ acl.config({
   filename: "acl.json",
   baseUrl: "api",
   defaultRole: "guest",
-  roleSearchPath: "user.provider"
+  roleSearchPath: "user.role"
 });
 
 module.exports = function(app) {

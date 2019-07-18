@@ -2,7 +2,6 @@ module.exports = function(sequelize, DataTypes) {
   var User = sequelize.define(
     "User",
     {
-      // Giving the User model attributes
       name: {
         type: DataTypes.STRING,
         allowNull: false
@@ -18,13 +17,18 @@ module.exports = function(sequelize, DataTypes) {
       token: {
         type: DataTypes.STRING,
         allowNull: false
+      },
+      role: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        defaultValue: "user"
       }
     },
     {
       indexes: [
         {
           name: "token_index",
-          fields: ["token"]
+          fields: ["provider", "token"]
         }
       ]
     }
