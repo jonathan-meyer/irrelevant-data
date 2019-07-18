@@ -31,6 +31,12 @@ body {
     border:  3px solid firebrick;
     margin: 15px;
 }
+.card{
+    width: 200px;
+    border: 2px solid firebrick;
+    padding: 3px;
+    margin: 5px;
+}
 
 .list-group-item {
   line-height: 2.5;
@@ -95,3 +101,7 @@ body {
     right: 15px;
 }
 
+.thumbnail {
+    width: 150px;
+    text-align: center;
+}
