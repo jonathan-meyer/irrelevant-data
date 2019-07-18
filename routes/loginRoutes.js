@@ -27,7 +27,7 @@ passport.serializeUser((user, done) => {
       token: user.id
     }
   })
-    .then(([user, created]) => {
+    .then(([user]) => {
       done(null, user);
     })
     .catch(err => {
