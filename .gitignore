@@ -63,3 +63,4 @@ typings/
 # misc
 public/stej.html
 *.csv
+*.sql
