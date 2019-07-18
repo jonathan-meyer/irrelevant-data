@@ -57,7 +57,19 @@ var API = {
           url: "/auth/user",
           type: "GET"
       });
-  }
+  },
+  createFaveList: function(user){
+      return $.ajax({
+          url: "/api/favoriteLists",
+          type: "POST"
+      });
+  },
+  getUserLists: function(user){
+      return $.ajax({
+          url: "/api/favoriteLists/" + user.id,
+          method: "GET"
+      });
+  } 
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
@@ -70,6 +82,8 @@ var refreshExamples = function() {
   API.getExamples().then(function(data) {
       var $examples = data.map(function(example) {
       var $title = $("<h2>").text(example.name).attr("href", "/lighthouse/" + example.id).attr('class','text-center lh-title');
+      var addFavorite = $('<div>').addClass('favorite');
+      addFavorite.append($('<i>').addClass('far fa-plus-square').attr('data-id', example.id));
       var $lhImage = $('<img>').attr('src', example.image).addClass('card-img-top').attr('alt', example.name);
       var $lhDesc = $('<p>').attr('class','lh-desc text-center').text(example.description);
       var yearBuilt =  $('<li>').attr('class','lh-spec year-built').text("Year built: " + example.yearBuilt);
@@ -81,7 +95,7 @@ var refreshExamples = function() {
       var $card = $("<div>").attr({
           class: "card",
           "data-id": example.id
-        }).append($lhImage).append($title).append($lhDesc).append(specs);
+        }).append($lhImage).append($title).append($lhDesc).append(specs).append(addFavorite);
 
       var $button = $("<button>").addClass("btn btn-danger float-right delete").text("ｘ");
       var $cardWrapper = $('<a>');
@@ -156,44 +170,45 @@ var handleDeleteBtnClick = function() {
 
 function isUserInDatabase(user){
     console.log('running isUserInDatabase()');
-    API.getUsers(user.email).then(function(response){
-        console.log(response);
-        if (response.length === 0){
-            $('body').addClass('no-aficionado');
-        }
-        for (i=0;i<response.length;i++){
-            if (user.email === response[i].email && user.token === response[i].token){
-                console.log("User matched");
-                isUser = true;
-                console.log(response[i]);
-                $('#username-container').text(`Hello, ${response[i].name}`);
-                $('body').addClass('aficionado');
-                $('body').removeClass('no-aficionado');
-                localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
-            } else {
-                console.log('user not in database');
-                alert("We're sorry, the username or password you entered was incorrect.");
-            }
-        }
-    });
     API.getUser().then(function(response){
         console.log(response);
-    })
+        $('body').addClass('aficionado').removeClass('no-aficionado');
+    }).catch(function(err){
+        if (err){
+            console.log(err);
+            $('body').addClass('no-aficionado').removeClass('aficionado');
+        }
+    });
+                // API.getUsers(user.email).then(function(response){
+                //     console.log(response);
+                //     if (response.length === 0){
+                //         ;
+                //     }
+                //     for (i=0;i<response.length;i++){
+                //         if (user.email === response[i].email && user.token === response[i].token){
+                //             console.log("User matched");
+                //             isUser = true;
+                //             console.log(response[i]);
+                //             $('#username-container').text(`Hello, ${response[i].name}`);
+                //             $('body').addClass('aficionado');
+                //             $('body').removeClass('no-aficionado');
+                //             localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
+                //         } else {
+                //             console.log('user not in database');
+                //             alert("We're sorry, the username or password you entered was incorrect.");
+                //         }
+                //     }
+                // });
 }
 
-function checkUser(){
-    if (localStorage.getItem('lighthouseAffUser')){
-        user = JSON.parse(localStorage.getItem('lighthouseAffUser'));
-        console.log(localStorage.getItem('lighthouseAffUser'));
-        console.log(typeof JSON.parse(localStorage.getItem('lighthouseAffUser')));
-        isUserInDatabase(user);
-    } else {
-        console.log(false);
-        $('#username-container').text('');
-        $("body").addClass('no-aficionado');
-        $('body').removeClass('aficionado');
-        return false;
-    }
+function checkFaveList(user){
+    API.getUserLists(user).then(function(response){
+        if (response.length === 0){
+            console.log('no favorite lists');
+        } else {
+            // do something with the favorites list
+        }
+    })
 }
 
 function initSlider(target, options){
@@ -201,7 +216,8 @@ function initSlider(target, options){
 }
 // Get lighthouses from database on page load
 refreshExamples();
-checkUser();
+// checkUser();
+isUserInDatabase();
 
 // Add event listeners to the register/login forms
 $register.on('submit', function(event){
@@ -240,6 +256,14 @@ $lighthouse.on("submit", function(event){
     handleFormSubmit();
 });
 $lighthouses.on("click", ".delete", handleDeleteBtnClick);
+
+$('#lighthouse-wrapper').on('click','.card i', function(){
+    // code to add a favorite to personal list
+    console.log($(this));
+    let id = $(this.get(0).dataset.id);
+    // Create a favorites list if not already a list fot this user/return list
+    // Add item to lighthouse favorites list
+})
 
 $('#log-out').on('click',function(){
     localStorage.removeItem('lighthouseAffUser');
