@@ -220,51 +220,47 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-function isUserInDatabase(user) {
-  console.log("running isUserInDatabase()");
-  API.getUsers(user.email).then(function(response) {
-    console.log(response);
-    if (response.length === 0) {
-      $("body").addClass("no-aficionado");
-    }
-    for (i = 0; i < response.length; i++) {
-      if (
-        user.email === response[i].email &&
-        user.token === response[i].token
-      ) {
-        console.log("User matched");
-        isUser = true;
-        console.log(response[i]);
-        $("#username-container").text(`Hello, ${response[i].name}`);
-        $("body").addClass("aficionado");
-        $("body").removeClass("no-aficionado");
-        localStorage.setItem("lighthouseAffUser", JSON.stringify(user));
-      } else {
-        console.log("user not in database");
-        alert(
-          "We're sorry, the username or password you entered was incorrect."
-        );
-      }
-    }
-  });
-  API.getUser().then(function(response) {
-    console.log(response);
-  });
+function isUserInDatabase(user){
+    console.log('running isUserInDatabase()');
+    API.getUser().then(function(response){
+        console.log(response);
+        $('body').addClass('aficionado').removeClass('no-aficionado');
+    }).catch(function(err){
+        if (err){
+            console.log(err);
+            $('body').addClass('no-aficionado').removeClass('aficionado');
+        }
+    });
+                // API.getUsers(user.email).then(function(response){
+                //     console.log(response);
+                //     if (response.length === 0){
+                //         ;
+                //     }
+                //     for (i=0;i<response.length;i++){
+                //         if (user.email === response[i].email && user.token === response[i].token){
+                //             console.log("User matched");
+                //             isUser = true;
+                //             console.log(response[i]);
+                //             $('#username-container').text(`Hello, ${response[i].name}`);
+                //             $('body').addClass('aficionado');
+                //             $('body').removeClass('no-aficionado');
+                //             localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
+                //         } else {
+                //             console.log('user not in database');
+                //             alert("We're sorry, the username or password you entered was incorrect.");
+                //         }
+                //     }
+                // });
 }
 
-function checkUser() {
-  if (localStorage.getItem("lighthouseAffUser")) {
-    user = JSON.parse(localStorage.getItem("lighthouseAffUser"));
-    console.log(localStorage.getItem("lighthouseAffUser"));
-    console.log(typeof JSON.parse(localStorage.getItem("lighthouseAffUser")));
-    isUserInDatabase(user);
-  } else {
-    console.log(false);
-    $("#username-container").text("");
-    $("body").addClass("no-aficionado");
-    $("body").removeClass("aficionado");
-    return false;
-  }
+function checkFaveList(user){
+    API.getUserLists(user).then(function(response){
+        if (response.length === 0){
+            console.log('no favorite lists');
+        } else {
+            // do something with the favorites list
+        }
+    })
 }
 
 function initSlider(target, options) {
@@ -272,7 +268,8 @@ function initSlider(target, options) {
 }
 // Get lighthouses from database on page load
 refreshExamples();
-checkUser();
+// checkUser();
+isUserInDatabase();
 
 // Add event listeners to the register/login forms
 $register.on("submit", function(event) {
@@ -327,7 +324,15 @@ $lighthouse.on("submit", function(event) {
 });
 $lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
-$("#log-out").on("click", function() {
-  localStorage.removeItem("lighthouseAffUser");
-  checkUser();
-});
+$('#lighthouse-wrapper').on('click','.card i', function(){
+    // code to add a favorite to personal list
+    console.log($(this));
+    let id = $(this.get(0).dataset.id);
+    // Create a favorites list if not already a list fot this user/return list
+    // Add item to lighthouse favorites list
+})
+
+$('#log-out').on('click',function(){
+    localStorage.removeItem('lighthouseAffUser');
+    checkUser();
+})
