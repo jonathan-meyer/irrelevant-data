@@ -53,7 +53,9 @@ body {
 .app-login a {
     text-decoration: none;
 }
-.no-aficionado #add-lh-btn, .no-aficionado #log-out {
+.no-aficionado #add-lh-btn, 
+.no-aficionado #log-out,
+.no-aficionado #edit-wrapper {
     display: none;
 }
 .aficionado #log-out {
