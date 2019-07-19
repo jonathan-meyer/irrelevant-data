@@ -29,7 +29,7 @@ module.exports = function(app) {
       });
   });
 
-  // Get all lighthouses for the favoriteList's ID
+  // Get a lighthouse
   router.get("/lighthouses/:id", function(req, res) {
     db.Lighthouse.findOne({
       where: {
@@ -56,6 +56,7 @@ module.exports = function(app) {
       });
   });
 
+  // modify a lighthouse
   router.put("/lighthouses", function(req, res) {
     db.Lighthouse.update(req.body, { where: { id: req.body.id } })
       .then(function(dbLighthouses) {
@@ -80,94 +81,42 @@ module.exports = function(app) {
   // FavoriteList
   // =============================================================
 
-  // Get all favoriteLists
-  router.get("/favoriteLists", function(req, res) {
-    db.FavoriteList.findAll({})
-      .then(function(dbFavoriteLists) {
-        res.json(dbFavoriteLists);
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      });
-  });
-
-  // Get all favoriteLists for the user's ID
-  router.get("/favoriteLists/:id", function(req, res) {
-    db.FavoriteList.findOne({
-      where: {
-        id: req.params.id
-      },
-      include: [db.User]
+  // Get a user's list
+  router.get("/users/favorites", function(req, res) {
+    db.FavoriteList.findAll({
+      where: { UserId: req.user.id },
+      include: [db.Lighthouse]
     })
-      .then(function(dbFavoriteList) {
-        res.json(dbFavoriteList);
+      .then(function(data) {
+        res.json(data);
       })
       .catch(err => {
         res.status(500).json(err);
       });
   });
 
-  // Create a new FavoriteList
-  router.post("/favoriteLists", function(req, res) {
-    db.FavoriteList.create(req.body)
-      .then(function(dbFavoriteList) {
-        res.json(dbFavoriteList);
+  // modify a user's list
+  router.put("/users/favorites", function(req, res) {
+    const { user, body } = req;
+    const { add, del } = body;
+
+    user
+      .getFavoriteLists()
+      .then(([list]) => {
+        console.log({ list, del, add });
+
+        Promise.all([
+          del && list.removeLighthouse(del),
+          add && list.addLighthouse(add)
+        ]).then(data => {
+          res.json({ removed: data[0], added: data[1] });
+        });
       })
       .catch(err => {
+        console.log(err);
         res.status(500).json(err);
       });
   });
-
-  // Delete a FavoriteList by id
-  router.delete("/favoriteLists/:id", function(req, res) {
-    db.FavoriteList.destroy({ where: { id: req.params.id } })
-      .then(function(dbFavoriteList) {
-        res.json(dbFavoriteList);
-      })
-      .catch(err => {
-        res.status(500).json(err);
-      });
-  });
-
-  // User
-  // =============================================================
-
-  // // Get all users
-  // router.get("/users", function(req, res) {
-  //   db.User.findAll({}).then(function(dbUsers) {
-  //     res.json(dbUsers);
-  //   });
-  // });
-
-  // // Create a new User
-  // router.post("/users", function(req, res) {
-  //   db.User.create(req.body).then(function(dbUsers) {
-  //     res.json(dbUsers);
-  //   });
-  // });
-
-  // // Delete a User by id
-  // router.delete("/users/:id", function(req, res) {
-  //   res.status(401).json({ 401: "Unauthorized" });
-  // });
-
-  // // Add a user to the database
-  // router.post("/user/new", function(req, res) {
-  //   db.User.create(req.body).then(function(results) {
-  //     res.json(results);
-  //   });
-  // });
-
-  // // Get users from database
-  // router.get("/users/:email", function(req, res) {
-  //   db.User.findAll({
-  //     where: {
-  //       email: req.params.email
-  //     }
-  //   }).then(function(results) {
-  //     res.json(results);
-  //   });
-  // });
 
   app.use("/api", router);
 };
