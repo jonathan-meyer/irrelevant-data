@@ -25,6 +25,48 @@
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
     <script>
       $(function() {
+        const getFavs = () => {
+          $.ajax(`/api/users/favorites`).then(([favs]) => {
+            console.log({ favs });
+
+            $("#fav-title").text(favs.name);
+            $("#favs").empty();
+
+            favs.Lighthouses.map(house => {
+              $("#favs").append(
+                $("<li>").append(
+                  $("<button>")
+                    .data("houseId", house.id)
+                    .addClass("btn btn-sm btn-outline-primary del-fav")
+                    .text("-"),
+                  $("<span>").text(house.name)
+                )
+              );
+            });
+          });
+        };
+
+        const getLighthouses = () => {
+          $.ajax(`/api/lighthouses`).then(houses => {
+            console.log({ houses });
+
+            $("#lighthouses").empty();
+
+            houses.map(house => {
+              $("#lighthouses").append(
+                $("<li>").append(
+                  $("<button>")
+                    .data("houseId", house.id)
+                    .addClass("btn btn-sm btn-outline-primary add-fav")
+                    .text("+"),
+                  $("<span>").text(house.name)
+                )
+              );
+            });
+          });
+        };
+
+        // add favorite click handler
         $("#lighthouses").on("click", ".add-fav", ({ target }) => {
           const houseId = $(target).data("houseId");
 
@@ -38,51 +80,40 @@
             dataType: "json"
           }).then(data => {
             console.log({ data });
+            getFavs();
           });
         });
 
-        $.ajax(`/api/lighthouses`).then(houses => {
-          console.log({ houses });
-          // $("#lighthouses-raw").text(JSON.stringify(houses, null, 2));
+        // delete favorite click handler
+        $("#favs").on("click", ".del-fav", ({ target }) => {
+          const houseId = $(target).data("houseId");
 
-          houses.map(house => {
-            $("#lighthouses").append(
-              $("<li>").append(
-                $("<button>")
-                  .data("houseId", house.id)
-                  .addClass("btn btn-sm btn-outline-primary add-fav")
-                  .text("+"),
-                $("<span>").text(house.name)
-              )
-            );
+          console.log("delete:", houseId);
+
+          $.ajax({
+            url: `/api/users/favorites`,
+            method: "PUT",
+            data: JSON.stringify({ del: [houseId] }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+          }).then(data => {
+            console.log({ data });
+            getFavs();
           });
         });
 
+        // get the currently logged in user
         $.ajax("/auth/user")
           .then(user => {
             $(".login").hide();
             $(".logout").show();
 
             console.log({ user });
+
             $("#user").text(JSON.stringify(user, null, 2));
 
-            $.ajax(`/api/users/favorites`).then(([favs]) => {
-              console.log({ favs });
-              // $("#favs-raw").text(JSON.stringify(favs, null, 2));
-
-              $("#fav-title").text(favs.name);
-
-              favs.Lighthouses.map(fav => {
-                $("#favs").append(
-                  $("<li>").append(
-                    $("<button>")
-                      .addClass("btn btn-sm btn-outline-primary del-fav")
-                      .text("-"),
-                    $("<span>").text(fav.name)
-                  )
-                );
-              });
-            });
+            getFavs();
+            getLighthouses();
           })
           .catch(() => {
             $(".login").show();
