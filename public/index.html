@@ -33,21 +33,21 @@
         </div>
         <div>
                 <a id="log-out" href="/auth/logout">
-        <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#registration-modal" aria-controls="" aria-expanded="false" aria-label="">
+        <button class="btn btn-outline-danger" type="button" aria-controls="" aria-expanded="false" aria-label="">
             <span >Log Out</span>
         </button>
         </a>
         </div>
-            <form class="form-inline my-2 my-lg-0">
+            <form id="search-form" class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
             <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
             </form>
         </div>
         </nav>     
     <div id="home">
-      <div class="container">
-        <div class="row">
-            <div class="col-8 offset-2">
+      <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col col-md-11 col-lg-10">
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
                     <h1 class="display-4">Lighthouse Aficionado</h1>
@@ -57,8 +57,8 @@
             </div>
         </div>   
         
-        <div class="row">
-          <div class="col-8 offset-2">
+        <div class="row justify-content-center">
+          <div class="col-md-11 col-lg-10 col">
             <h1 id="msg"></h1>
             
             <ul id="example-list" class="list-group">
@@ -82,63 +82,7 @@
                 <div class="prev-wrapper">
                     <i class="fas fa-chevron-left"></i>
                 </div>
-                <div id="lighthouses">
-                    
-                    <div class="card" style="width: 18rem;">
-                        <div class="favorite">
-                                <i class="far fa-plus-square"></i>
-                        </div>
-                        <div class="thumbnail img-thumbnail">
-                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/hangman.png" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            
-                        </div>
-                    </div>
-                    
-                    <div class="card" style="width: 18rem;">
-                        <div class="favorite">
-                                <i class="far fa-plus-square"></i>
-                        </div>
-                        <div class="thumbnail img-thumbnail">
-                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/starWars.png" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="favorite">
-                                <i class="far fa-plus-square"></i>
-                        </div>
-                        <div class="thumbnail img-thumbnail">
-                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/giphy.png" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            
-                        </div>
-                    </div>
-                    <div class="card" style="width: 18rem;">
-                        <div class="favorite">
-                                <i class="far fa-plus-square"></i>
-                        </div>
-                        <div class="img-thumbnail thumbnail">
-                        <img class="card-img-top" src="https://www.jamespcutler.com/assets/images/trivia.png" alt="Card image cap">
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                            
-                        </div>
-                    </div>
-                    
-                </div>
+                <div id="lighthouses"></div>
                 <div class="next-wrapper">
                     <i class="fas fa-chevron-right"></i>
                 </div>
@@ -363,6 +307,7 @@
             </div>
         </div>
     </div>
+    <script type="text/javascript" src="/js/matchHeight.js"></script>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
     <script src="/js/index.js"></script>
 

@@ -73,7 +73,6 @@ var refreshExamples = function() {
     initSlider("#lighthouses", "unslick");
     console.log("#lighthouses unslicked");
   }
-  // initSlider('#lighthouses',"unslick");
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $title = $("<h2>")
@@ -111,6 +110,7 @@ var refreshExamples = function() {
         .append(serviceYearEnd);
       var favorite = $('<div>')
         .attr('class','favorite')
+        .attr('title','Add to favorites list')
         .html("<i class='far fa-plus-square'></i>");
       var $card = $("<div>")
         .attr({
@@ -130,18 +130,36 @@ var refreshExamples = function() {
       $card.append($button);
       $cardWrapper.append($card);
 
+      
       return $card;
     });
 
     $lighthouses.empty();
     $lighthouses.append($examples);
+    setTimeout(function(){
+        $('.card').matchHeight();
+    }, 100)
     initSlider("#lighthouses", {
       autoplay: false,
       prevArrow: ".prev-wrapper",
       nextArrow: ".next-wrapper",
-      slidesToShow: 1,
+      slidesToShow: 3,
       infinite: true,
-      adaptiveHeight:false
+      adaptiveHeight: true,
+      responsive: [
+          {
+              breakpoint: 768,
+              settings: {
+                  slidesToShow: 1
+              }
+          },
+          {
+              breakpoint: 980,
+              settings: {
+                  slidesToShow: 2
+              }
+          }
+      ]
     });
   });
 };

@@ -79,7 +79,8 @@ body {
     opacity: 0;
     transition: opacity .5s ease;
 }
-#lighthouses .card:hover .favorite {
+#lighthouses .card:hover .favorite,
+#lighthouse-wrapper:hover .slick-arrow {
     opacity: 1;
 }
 .card .favorite:hover {
@@ -129,10 +130,16 @@ body {
 }
 .slick-arrow {
     text-shadow: 0px 1px 10px grey;
+    opacity: 0;
 }
 .img-thumbnail {
+    width: 150px;
+    text-align: center;
     width: 200px;
     display: block;
     margin-left: auto;
     margin-right: auto;
+}
+.navbar #search-form {
+    display: none;
 }
