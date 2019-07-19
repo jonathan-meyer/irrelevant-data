@@ -108,7 +108,8 @@ body {
     left: 15px;
 }
 #lighthouse-wrapper .next-wrapper {
-    right: 15px;
+    right: 15;
+
 }
 #edit-wrapper {
     position: absolute;
@@ -127,7 +128,7 @@ body {
 .slick-arrow {
     text-shadow: 0px 1px 10px grey;
 }
-.thumbnail {
+.img-thumbnail {
     width: 150px;
     text-align: center;
 }
