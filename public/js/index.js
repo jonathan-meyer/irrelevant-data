@@ -7,6 +7,8 @@ var $lighthouse = $("#new-lighthouse");
 var $lighthouses = $("#lighthouses");
 var $login = $("#login-form");
 var $register = $("#registration-form");
+var editButton = $('#edit');
+var noEdit = $('#no-edit');
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -300,6 +302,17 @@ $register.on("submit", function(event) {
   API.addUser(user);
   console.log(user);
   checkUser();
+});
+
+editButton.on('click',function(){
+    $('body').addClass('edit-mode');
+    editButton.hide();
+    noEdit.show();
+});
+noEdit.on('click',function(){
+    $('body').removeClass('edit-mode');
+    editButton.show();
+    noEdit.hide();
 });
 
 $login.on("submit", function(event) {

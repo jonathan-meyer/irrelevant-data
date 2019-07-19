@@ -17,6 +17,14 @@
     <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   </head>
   <body>
+      <div id="edit-wrapper">
+          <button class="btn btn-warning" id="edit">
+                <span>Remove Lighthouses<br>From Database</span>
+          </button>
+          <button class="btn btn-warning" id='no-edit'>
+              <span>Exit Edit Mode</span>
+          </button>
+      </div>
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div>
         <button class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#login-modal" aria-controls="" aria-expanded="false" aria-label="">
@@ -62,7 +70,7 @@
               data-toggle="modal"
               data-target="#lighthouse-submit"
             >
-              Enter a new Lighthouse!
+              Add Lighthouse to Database
             </button>
             
 
@@ -415,7 +423,7 @@
                     Close
                 </button>
                 <button type="button" class="btn btn-primary">
-                    Save changes
+                    Save Changes
                 </button>
                 </div>
             </div>
