@@ -140,7 +140,8 @@ var refreshExamples = function() {
       prevArrow: ".prev-wrapper",
       nextArrow: ".next-wrapper",
       slidesToShow: 1,
-      infinite: true
+      infinite: true,
+      adaptiveHeight:false
     });
   });
 };
