@@ -74,7 +74,7 @@ var refreshExamples = function() {
         .attr("class", "text-center lh-title");
       var $lhImage = $("<img>")
         .attr("src", example.image)
-        .addClass("card-img-top")
+        .addClass("card-img-top img-thumbnail")
         .attr("alt", example.name);
       var $lhDesc = $("<p>")
         .attr("class", "lh-desc text-center")
