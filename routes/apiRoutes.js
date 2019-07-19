@@ -3,6 +3,14 @@ const acl = require("express-acl");
 
 const db = require("../models");
 
+const possessive = noun => {
+  if (typeof noun !== "string")
+    throw new TypeError("Value passed must be a string");
+  if (noun.length === 0) throw new Error("Cannot make empty string possessive");
+  if (noun.toLowerCase().endsWith("s")) return noun + "'";
+  return noun + "'s";
+};
+
 acl.config({
   filename: "acl.json",
   baseUrl: "api",
@@ -100,18 +108,26 @@ module.exports = function(app) {
     const { user, body } = req;
     const { add, del } = body;
 
+    console.log({ del, add });
+
     user
       .getFavoriteLists()
       .then(([list]) => {
-        console.log({ list, del, add });
-
+        if (list === undefined) {
+          return db.FavoriteList.create({
+            name: `${possessive(user.name)} List`,
+            description: "Auto generated list."
+          }).then(list => user.addFavoriteLists(list).then(() => list));
+        } else {
+          return list;
+        }
+      })
+      .then(list =>
         Promise.all([
           del && list.removeLighthouse(del),
           add && list.addLighthouse(add)
-        ]).then(data => {
-          res.json({ removed: data[0], added: data[1] });
-        });
-      })
+        ]).then(data => res.json({ removed: data[0], added: data[1] }))
+      )
       .catch(err => {
         console.log(err);
         res.status(500).json(err);
