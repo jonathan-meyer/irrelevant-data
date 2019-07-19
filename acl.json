@@ -18,6 +18,21 @@
     "group": "user",
     "permissions": [
       {
+        "resource": "lighthouses",
+        "methods": ["DELETE"],
+        "action": "deny"
+      },
+      {
+        "resource": "*",
+        "methods": "*",
+        "action": "allow"
+      }
+    ]
+  },
+  {
+    "group": "admin",
+    "permissions": [
+      {
         "resource": "*",
         "methods": "*",
         "action": "allow"
