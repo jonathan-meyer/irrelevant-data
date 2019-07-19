@@ -58,6 +58,12 @@ var API = {
       url: "/auth/user",
       type: "GET"
     });
+  },
+  logOut: function(){
+      return $.ajax({
+          url: "/auth/logout",
+          type: "GET"
+      })
   }
 };
 
@@ -103,6 +109,9 @@ var refreshExamples = function() {
         .append(yearBuilt)
         .append(serviceYearStart)
         .append(serviceYearEnd);
+      var favorite = $('<div>')
+        .attr('class','favorite')
+        .html("<i class='far fa-plus-square'></i>");
       var $card = $("<div>")
         .attr({
           class: "card",
@@ -111,8 +120,9 @@ var refreshExamples = function() {
         .append($lhImage)
         .append($title)
         .append($lhDesc)
-        .append(specs);
-
+        .append(specs)
+        .append(favorite);
+      
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
         .text("ｘ");
@@ -345,7 +355,4 @@ $('#lighthouse-wrapper').on('click','.card i', function(){
     // Add item to lighthouse favorites list
 })
 
-$('#log-out').on('click',function(){
-    localStorage.removeItem('lighthouseAffUser');
-    checkUser();
-})
+
