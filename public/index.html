@@ -3,73 +3,119 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
 
-    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
-    <link rel="stylesheet" href="/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="/bootstrap/dist/css/bootstrap.css"
+    />
+    <link rel="stylesheet" type="text/css" href="/styles/styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+
+    <link
+      rel="shortcut icon"
+      href="/images/lighthouse.png"
+      type="image/x-icon"
+    />
 
     <title>Lighthouse Aficionado</title>
 
     <script src="/jquery/dist/jquery.js"></script>
     <script src="/popper.js/dist/umd/popper.js"></script>
     <script src="/bootstrap/dist/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
   </head>
   <body class="no-aficionado">
-      <div id="edit-wrapper">
-          <button class="btn btn-warning" id="edit">
-                <span>Remove Lighthouses<br>From Database</span>
-          </button>
-          <button class="btn btn-warning" id='no-edit'>
-              <span>Exit Edit Mode</span>
-          </button>
-      </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-start">
-        <div>
-        <button id="log-in" class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#login-modal" aria-controls="" aria-expanded="false" aria-label="">
-            <span>Login</span>
-        </button>
-        </div>
-        <div>
-                <a id="log-out" href="/auth/logout">
-        <button class="btn btn-outline-danger" type="button" aria-controls="" aria-expanded="false" aria-label="">
-            <span >Log Out</span>
-        </button>
-        </a>
+    <div id="edit-wrapper">
+      <button class="btn btn-warning" id="edit">
+        <span>Remove Lighthouses<br />From Database</span>
+      </button>
+      <button class="btn btn-warning" id="no-edit">
+        <span>Exit Edit Mode</span>
+      </button>
     </div>
-            <div id="greeting">
-                Welcome back, <span id="user-full-name"></span>!  <small><a href="/auth/logout">Not you?</a></small>
-            </div>
-            <form id="search-form" class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Search</button>
-            </form>
-        </div>
-        </nav>     
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-light justify-content-start"
+    >
+      <div>
+        <button
+          id="log-in"
+          class="btn btn-outline-danger"
+          type="button"
+          data-toggle="modal"
+          data-target="#login-modal"
+          aria-controls=""
+          aria-expanded="false"
+          aria-label=""
+        >
+          <span>Login</span>
+        </button>
+      </div>
+
+      <div>
+        <a id="log-out" href="/auth/logout">
+          <button
+            class="btn btn-outline-danger"
+            type="button"
+            aria-controls=""
+            aria-expanded="false"
+            aria-label=""
+          >
+            <span>Log Out</span>
+          </button>
+        </a>
+      </div>
+      <div id="greeting">
+        Welcome back, <span id="user-full-name"></span>! &nbsp;
+        <small><a href="/auth/logout">Not you?</a></small>
+      </div>
+      <form id="search-form" class="form-inline my-2 my-lg-0">
+        <input
+          class="form-control mr-sm-2"
+          type="search"
+          placeholder="Search"
+          aria-label="Search"
+        />
+        <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">
+          Search
+        </button>
+      </form>
+    </nav>
+
     <div id="home">
       <div class="container-fluid">
         <div class="row justify-content-center">
-            <div class="col col-md-11 col-lg-10">
+          <div class="col col-md-11 col-lg-10">
             <div class="jumbotron jumbotron-fluid">
-                <div class="container">
-                    <h1 class="display-4">Lighthouse Aficionado</h1>
-                    <p class="lead">Your one-stop shop for all things lighthouses! Share your favorites and explore new lights.</p>
-                </div>
-            </div> 
+              <div class="container">
+                <h1 class="display-4">Lighthouse Aficionado</h1>
+                <p class="lead">
+                  Your one-stop shop for all things lighthouses! Share your
+                  favorites and explore new lights.
+                </p>
+              </div>
             </div>
-        </div>   
-        
+          </div>
+        </div>
+
         <div class="row justify-content-center">
           <div class="col-md-11 col-lg-10 col">
             <h1 id="msg"></h1>
-            
-            <ul id="example-list" class="list-group">
-                
-            </ul>
+
+            <ul id="example-list" class="list-group"></ul>
 
             <button
-                id="add-lh-btn"
+              id="add-lh-btn"
               type="button"
               class="btn btn-primary"
               data-toggle="modal"
@@ -77,248 +123,282 @@
             >
               Add Lighthouse to Database
             </button>
-            
 
-         <h3 id="header">Lighthouse Database</h3>
+            <h3 id="header">Lighthouse Database</h3>
 
             <div id="lighthouse-wrapper">
-                <div class="prev-wrapper">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div id="lighthouses"></div>
-                <div class="next-wrapper">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
+              <div class="prev-wrapper">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <div id="lighthouses"></div>
+              <div class="next-wrapper">
+                <i class="fas fa-chevron-right"></i>
+              </div>
             </div>
-            <ul id="example-list" class="list-group">
             <h3 id="database-head">My Favorite Lighthouses</h3>
             <ul id="fav-list" class="list group">
-                <div class="prev-wrapper arrow">
-                    <i class="fas fa-chevron-left"></i>
-                </div>
-                <div id="fav-lighthouse"></div>
-                <div class="next-wrapper arrow">
-                    <i class="fas fa-chevron-right"></i>
-                </div>
+              <div class="prev-wrapper arrow">
+                <i class="fas fa-chevron-left"></i>
+              </div>
+              <div id="fav-lighthouse"></div>
+              <div class="next-wrapper arrow">
+                <i class="fas fa-chevron-right"></i>
+              </div>
             </ul>
+          </div>
         </div>
+      </div>
     </div>
-</div>
-</div>
 
-<!-- Login Modal -->
-<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="loginModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <!-- Login Modal -->
+    <div
+      class="modal fade"
+      id="login-modal"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="loginModal"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Login</h5>
-                <button type="button" class="close"  data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+          <div class="modal-header">
+            <h5 class="modal-title">Login</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="row justify-content-center app-login">
+              <div class="col text-center">
+                <a href="/auth/fb">
+                  <div>
+                    <img src="images/fbLogo.png" />
+                  </div>
+                  <span>
+                    Login with Facebook
+                  </span>
+                </a>
+              </div>
+              <div class="col text-center">
+                <a href="/auth/google">
+                  <div>
+                    <img src="images/googleLogo.png" />
+                  </div>
+                  <span>
+                    Login with Google
+                  </span>
+                </a>
+              </div>
             </div>
-            <div class="modal-body">
-                <div class="row justify-content-center app-login">
-                    <div class="col text-center">
-                        <a href="/auth/fb">
-                            <div>
-                                <img src="images/fbLogo.png">
-                            </div>
-                            <span>
-                                Login with Facebook
-                            </span>
-                        </a>
-                    </div>
-                    <div class="col text-center">
-                        <a href="/auth/google">
-                            <div>
-                                <img src="images/googleLogo.png">
-                            </div>
-                            <span>
-                                Login with Google
-                            </span>
-                        </a>
-                    </div>
-                </div>
-            </div>
+          </div>
         </div>
+      </div>
     </div>
-</div>
 
-<!-- Submit Lighthouse Modal -->
-<div class="modal fade" id="lighthouse-submit" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalCenterTitle">
-                    Add a New Lighthouse
-                </h5>
-                <button
-                    type="button"
-                    class="close"
-                    data-dismiss="modal"
-                    aria-label="Close"
+    <!-- Submit Lighthouse Modal -->
+    <div
+      class="modal fade"
+      id="lighthouse-submit"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalCenterTitle">
+              Add a New Lighthouse
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form id="new-lighthouse" class="clearfix mb-4">
+              <div class="form-group">
+                <label for="Name">Lighthouse Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  class="form-control"
+                  aria-describedby="example-text"
+                  placeholder="Enter Lighthouse Name"
+                  required="true"
+                />
+              </div>
+              <div class="form-group">
+                <label for="description">Description</label>
+                <input
+                  class="form-control"
+                  id="description"
+                  aria-describedby="example-description"
+                  placeholder="Enter Description"
+                />
+              </div>
+              <div class="form-group">
+                <label for="street">Address/PO Box</label>
+                <input
+                  class="form-control"
+                  id="street"
+                  aria-describedby="example-location"
+                  placeholder="Enter Street Address/PO Box #"
+                />
+              </div>
+              <div class="form-group">
+                <label for="city">City</label>
+                <input
+                  class="form-control"
+                  id="city"
+                  aria-describedby="example-location"
+                  placeholder="Enter City"
+                />
+              </div>
+              <div class="form-group">
+                <label for="state">State</label>
+                <input
+                  class="form-control"
+                  id="state"
+                  aria-describedby="example-location"
+                  placeholder="Enter State"
+                />
+              </div>
+              <div class="form-group">
+                <label for="zip">Postal Code</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="zip"
+                  aria-describedby="example-location"
+                  placeholder="Enter Postal Code"
+                />
+              </div>
+              <div class="form-group">
+                <label for="lat">Latitude</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="lat"
+                  aria-describedby="latitude"
+                  placeholder="Enter Latitude Number"
+                  step=".000001"
+                />
+              </div>
+              <div class="form-group">
+                <label for="long">Longitude</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="long"
+                  aria-describedby="longitude"
+                  placeholder="Enter Postal Code"
+                  step=".000001"
+                />
+              </div>
+              <div class="form-group">
+                <label for="height">Height (ft)</label>
+                <input
+                  type="number"
+                  step=".01"
+                  class="form-control"
+                  id="height"
+                  aria-describedby="height"
+                  placeholder="Enter Height in Feet"
+                />
+              </div>
+              <div class="form-group">
+                <label for="year-built">Year Built</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="year-built"
+                  aria-describedby="year-built"
+                  placeholder="Enter year it was built"
+                />
+              </div>
+              <div class="form-group" id="in-service">
+                <div><span>In Service?</span></div>
+                <select
+                  class="form-control"
+                  id="in-service"
+                  aria-describedby="in-service"
+                  placeholder="None"
+                  required="true"
                 >
-                    <span aria-hidden="true">&times;</span>
-                </button>
-                </div>
-                <div class="modal-body">
-                <form id="new-lighthouse" class="clearfix mb-4">
-                    <div class="form-group">
-                    <label for="Name">Lighthouse Name</label>
-                    <input
-                        type="text"
-                        id="name"
-                        class="form-control"
-                        aria-describedby="example-text"
-                        placeholder="Enter Lighthouse Name"
-                        required="true"
-                    />
-                    </div>
-                    <div class="form-group">
-                    <label for="description">Description</label>
-                    <input
-                        class="form-control"
-                        id="description"
-                        aria-describedby="example-description"
-                        placeholder="Enter Description"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="street">Address/PO Box</label>
-                    <input
-                        class="form-control"
-                        id="street"
-                        aria-describedby="example-location"
-                        placeholder="Enter Street Address/PO Box #"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="city">City</label>
-                    <input
-                        class="form-control"
-                        id="city"
-                        aria-describedby="example-location"
-                        placeholder="Enter City"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="state">State</label>
-                    <input
-                        class="form-control"
-                        id="state"
-                        aria-describedby="example-location"
-                        placeholder="Enter State"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="zip">Postal Code</label>
-                    <input type="number"
-                        class="form-control"
-                        id="zip"
-                        aria-describedby="example-location"
-                        placeholder="Enter Postal Code"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="lat">Latitude</label>
-                    <input type="number"
-                        class="form-control"
-                        id="lat"
-                        aria-describedby="latitude"
-                        placeholder="Enter Latitude Number"
-                        step=".000001"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="long">Longitude</label>
-                    <input type="number"
-                        class="form-control"
-                        id="long"
-                        aria-describedby="longitude"
-                        placeholder="Enter Postal Code"
-                        step=".000001"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="height">Height (ft)</label>
-                    <input type="number" step=".01"
-                        class="form-control"
-                        id="height"
-                        aria-describedby="height"
-                        placeholder="Enter Height in Feet"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="year-built">Year Built</label>
-                    <input type="number"
-                        class="form-control"
-                        id="year-built"
-                        aria-describedby="year-built"
-                        placeholder="Enter year it was built"
-                    ></input>
-                    </div>
-                    <div class="form-group" id="in-service">
-                    <div><span>In Service?</span></div>
-                    <select class="form-control"
-                    id="in-service" 
-                    aria-describedby="in-service"
-                    placeholder="None" 
-                    required="true">
-                        <option value=""></option>
-                        <option value="yes">Yes</option>
-                        <option value="no">No</option>
-                      </select>
-                    </div>
-                    <div class="form-group">
-                    <label for="service-start">Year Service Started</label>
-                    <input type="number"
-                        class="form-control"
-                        id="service-start"
-                        aria-describedby="service-start"
-                        placeholder="Enter Year Service Started"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="service-end">Year Service Ended</label>
-                    <input type="number"
-                        class="form-control"
-                        id="service-end"
-                        aria-describedby="service-end"
-                        placeholder="Enter Year Decomisioned"
-                    ></input>
-                    </div>
-                    <div class="form-group">
-                    <label for="picture">Lighthouse Picture</label>
-                    <input type="text"
-                        class="form-control"
-                        id="picture"
-                        aria-describedby="picture"
-                        placeholder="Enter Lighthouse PictureURL"
-                    ></input>
-                    </div>
-                    <button type="submit" id="submit" class="btn btn-primary float-right" >
-                    Submit
-                    </button>
-                </form>
-                </div>
-                <div class="modal-footer">
-                <button
-                    type="button"
-                    class="btn btn-secondary"
-                    data-dismiss="modal"
-                >
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                    Save Changes
-                </button>
-                </div>
-            </div>
+                  <option value=""></option>
+                  <option value="yes">Yes</option>
+                  <option value="no">No</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="service-start">Year Service Started</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="service-start"
+                  aria-describedby="service-start"
+                  placeholder="Enter Year Service Started"
+                />
+              </div>
+              <div class="form-group">
+                <label for="service-end">Year Service Ended</label>
+                <input
+                  type="number"
+                  class="form-control"
+                  id="service-end"
+                  aria-describedby="service-end"
+                  placeholder="Enter Year Decomisioned"
+                />
+              </div>
+              <div class="form-group">
+                <label for="picture">Lighthouse Picture</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="picture"
+                  aria-describedby="picture"
+                  placeholder="Enter Lighthouse PictureURL"
+                />
+              </div>
+              <button
+                type="submit"
+                id="submit"
+                class="btn btn-primary float-right"
+              >
+                Submit
+              </button>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-dismiss="modal"
+            >
+              Close
+            </button>
+            <button type="button" class="btn btn-primary">
+              Save Changes
+            </button>
+          </div>
         </div>
+      </div>
     </div>
     <script type="text/javascript" src="/js/matchHeight.js"></script>
-    <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+    <script
+      type="text/javascript"
+      src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"
+    ></script>
     <script src="/js/index.js"></script>
-
   </body>
 </html>
