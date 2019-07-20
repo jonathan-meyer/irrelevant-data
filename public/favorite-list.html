@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Favorites List</title>
+
+    <link rel="stylesheet" href="/bootstrap/dist/css/bootstrap.css" />
+    <!-- <link rel="stylesheet" href="/styles/styles.css" /> -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+      integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"
+    />
+
+    <script src="/jquery/dist/jquery.js"></script>
+    <script src="/popper.js/dist/umd/popper.js"></script>
+    <script src="/bootstrap/dist/js/bootstrap.js"></script>
+    <script>
+      $(function() {
+        const getFavs = () => {
+          $.ajax(`/api/users/favorites`).then(([favs]) => {
+            console.log({ favs });
+
+            $("#fav-title").text(favs.name);
+            $("#favs").empty();
+
+            favs.Lighthouses.map(house => {
+              $("#favs").append(
+                $("<li>").append(
+                  $("<button>")
+                    .data("houseId", house.id)
+                    .addClass("btn btn-sm btn-outline-primary del-fav")
+                    .text("-"),
+                  $("<span>").text(house.name)
+                )
+              );
+            });
+          });
+        };
+
+        const getLighthouses = () => {
+          $.ajax(`/api/lighthouses`).then(houses => {
+            console.log({ houses });
+
+            $("#lighthouses").empty();
+
+            houses.map(house => {
+              $("#lighthouses").append(
+                $("<li>").append(
+                  $("<button>")
+                    .data("houseId", house.id)
+                    .addClass("btn btn-sm btn-outline-primary add-fav")
+                    .text("+"),
+                  $("<span>").text(house.name)
+                )
+              );
+            });
+          });
+        };
+
+        // add favorite click handler
+        $("#lighthouses").on("click", ".add-fav", ({ target }) => {
+          const houseId = $(target).data("houseId");
+
+          console.log("add:", houseId);
+
+          $.ajax({
+            url: `/api/users/favorites`,
+            method: "PUT",
+            data: JSON.stringify({ add: [houseId] }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+          }).then(data => {
+            console.log({ data });
+            getFavs();
+          });
+        });
+
+        // delete favorite click handler
+        $("#favs").on("click", ".del-fav", ({ target }) => {
+          const houseId = $(target).data("houseId");
+
+          console.log("delete:", houseId);
+
+          $.ajax({
+            url: `/api/users/favorites`,
+            method: "PUT",
+            data: JSON.stringify({ del: [houseId] }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json"
+          }).then(data => {
+            console.log({ data });
+            getFavs();
+          });
+        });
+
+        // get the currently logged in user
+        $.ajax("/auth/user")
+          .then(user => {
+            $(".login").hide();
+            $(".logout").show();
+
+            console.log({ user });
+
+            $("#user").text(JSON.stringify(user, null, 2));
+
+            getFavs();
+            getLighthouses();
+          })
+          .catch(() => {
+            $(".login").show();
+            $(".logout").hide();
+          });
+      });
+    </script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a
+        href="/auth/facebook"
+        style="display:none"
+        class="btn btn-primary login"
+        >FB Login</a
+      >
+      <a href="/auth/google" style="display:none" class="btn btn-warning login"
+        >Google Login</a
+      >
+      <a href="/auth/logout" style="display:none" class="btn btn-danger logout"
+        >Logout</a
+      >
+    </nav>
+    <div class="container">
+      <div class="card mb-1">
+        <div class="card-header">User</div>
+        <div class="card-body">
+          <pre id="user"></pre>
+        </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header" id="fav-title">Favs</div>
+        <div class="card-body">
+          <ul id="favs"></ul>
+          <pre id="favs-raw"></pre>
+        </div>
+      </div>
+
+      <div class="card mb-1">
+        <div class="card-header">Lighthouses</div>
+        <div class="card-body">
+          <ul id="lighthouses"></ul>
+          <pre id="lighthouses-raw"></pre>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

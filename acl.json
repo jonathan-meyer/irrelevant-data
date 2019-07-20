@@ -18,7 +18,7 @@
     "group": "user",
     "permissions": [
       {
-        "resource": "lighthouses",
+        "resource": "lighthouses/*",
         "methods": ["DELETE"],
         "action": "deny"
       },
