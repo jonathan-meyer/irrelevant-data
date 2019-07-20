@@ -25,7 +25,7 @@
               <span>Exit Edit Mode</span>
           </button>
       </div>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-start">
         <div>
         <button id="log-in" class="btn btn-outline-danger" type="button" data-toggle="modal" data-target="#login-modal" aria-controls="" aria-expanded="false" aria-label="">
             <span>Login</span>
@@ -93,7 +93,13 @@
             <ul id="example-list" class="list-group">
             <h3 id="database-head">My Favorite Lighthouses</h3>
             <ul id="fav-list" class="list group">
+                <div class="prev-wrapper arrow">
+                    <i class="fas fa-chevron-left"></i>
+                </div>
                 <div id="fav-lighthouse"></div>
+                <div class="next-wrapper arrow">
+                    <i class="fas fa-chevron-right"></i>
+                </div>
             </ul>
         </div>
     </div>
