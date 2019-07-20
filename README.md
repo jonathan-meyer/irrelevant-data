@@ -1,9 +1,15 @@
-# Lighthouse Aficionado 
+# Lighthouse Aficionado
+
+[![Build Status](https://travis-ci.org/jonathan-meyer/irrelevant-data.svg?branch=master)](https://travis-ci.org/jonathan-meyer/irrelevant-data)
+
 Lighthouse Aficionado is an application that provides information about lighthouses and allows users to submit new lighthouse entries, create their own lighthouse favorites list and maintain their lighthouse favorites lists.
 
-- - -
+---
+
 ## How To Use Lighthouse Aficionado
+
 ### **Video Guide**
+
 Watch the video here: https://www.youtube.com/watch?v=yuDc2vBKz3k
 
 ### **Step by Step instructions**
@@ -16,13 +22,14 @@ Watch the video here: https://www.youtube.com/watch?v=yuDc2vBKz3k
 6. Add a value to relevant fields (at minimal, Name, Description, Lighthouse Picture and In Service?) and click 'Save Changes'.
 
 ## Technologies Used
-* HTML
-* CSS
-* jQuery
-* Google API
-* Facebook API
-* Git
-* Heroku
-* Node.js
-* Express.js
-* Bootstrap / Sequelize / Passport
+
+- HTML
+- CSS
+- jQuery
+- Google API
+- Facebook API
+- Git
+- Heroku
+- Node.js
+- Express.js
+- Bootstrap / Sequelize / Passport
