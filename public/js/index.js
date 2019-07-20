@@ -138,7 +138,7 @@ var refreshExamples = function() {
     $lighthouses.append($examples);
     setTimeout(function(){
         $('.card').matchHeight();
-    }, 100)
+    }, 250)
     initSlider("#lighthouses", {
       autoplay: false,
       prevArrow: ".prev-wrapper",
