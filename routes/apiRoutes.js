@@ -36,7 +36,7 @@ module.exports = function(app) {
 
   // Get all lighthouses
   router.get("/lighthouses", function(req, res) {
-    db.Lighthouse.findAll({})
+    db.Lighthouse.findAll({ order: [["id", "DESC"]] })
       .then(function(dbLighthouses) {
         res.json(dbLighthouses);
       })
