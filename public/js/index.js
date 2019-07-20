@@ -1,15 +1,12 @@
 // Get references to page elements
 var $lhWrapper = $("#lighthouse-submit");
 var $lighthouse = $("#new-lighthouse");
-// var $exampleText = $("#example-text");
-// var $exampleDescription = $("#example-description");
-// var $submitBtn = $("#submit");
 var $lighthouses = $("#lighthouses");
 var $login = $("#login-form");
 var $register = $("#registration-form");
-var editButton = $('#edit');
-var noEdit = $('#no-edit');
-var $favLighthouse = $("#fav-lighthouse")
+var editButton = $("#edit");
+var noEdit = $("#no-edit");
+var $favLighthouse = $("#fav-lighthouse");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -36,13 +33,13 @@ var API = {
       type: "DELETE"
     });
   },
-  getFavorites:function(){
+  getFavorites: function() {
     return $.ajax({
       url: "/api/users/favorites",
       type: "GET"
     });
   },
-  modFavorites: function(id){
+  modFavorites: function(id) {
     return $.ajax({
       url: "/api/users/favorites",
       type: "PUT",
@@ -50,7 +47,7 @@ var API = {
         "Content-Type": "application/json; charset=UTF-8"
       },
       data: JSON.stringify({
-          add: [id]
+        add: [id]
       })
     });
   },
@@ -62,7 +59,7 @@ var API = {
       type: "POST",
       url: "/api/user/new",
       data: JSON.stringify(user)
-    }).then(function(response) {
+    }).then(function() {
       //console.log(response);
     });
   },
@@ -78,17 +75,17 @@ var API = {
       type: "GET"
     });
   },
-  logOut: function(){
-      return $.ajax({
-          url: "/auth/logout",
-          type: "GET"
-      })
+  logOut: function() {
+    return $.ajax({
+      url: "/auth/logout",
+      type: "GET"
+    });
   }
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
-    showFavorites();
+  showFavorites();
   if ($("#lighthouses.slick-slider").length) {
     initSlider("#lighthouses", "unslick");
     //console.log("#lighthouses unslicked");
@@ -128,9 +125,9 @@ var refreshExamples = function() {
         .append(yearBuilt)
         .append(serviceYearStart)
         .append(serviceYearEnd);
-      var favorite = $('<div>')
-        .attr('class','favorite')
-        .attr('title','Add to favorites list')
+      var favorite = $("<div>")
+        .attr("class", "favorite")
+        .attr("title", "Add to favorites list")
         .html(`<i class='far fa-plus-square' data-id='${example.id}'></i>`);
       var $card = $("<div>")
         .attr({
@@ -142,7 +139,7 @@ var refreshExamples = function() {
         .append($lhDesc)
         .append(specs)
         .append(favorite);
-      
+
       var $button = $("<button>")
         .addClass("btn btn-danger float-right delete")
         .text("ｘ");
@@ -150,37 +147,36 @@ var refreshExamples = function() {
       $card.append($button);
       $cardWrapper.append($card);
 
-      
       return $card;
     });
 
     $lighthouses.empty();
     $lighthouses.append($examples);
-    setTimeout(function(){
-        $('#lighthouse-wrapper .card').matchHeight();
+    setTimeout(function() {
+      $("#lighthouse-wrapper .card").matchHeight();
     }, 250);
-        initSlider("#lighthouses", {
-            autoplay: false,
-            prevArrow: "#lighthouse-wrapper .prev-wrapper",
-            nextArrow: "#lighthouse-wrapper .next-wrapper",
-            slidesToShow: 3,
-            infinite: true,
-            adaptiveHeight: true,
-            responsive: [
-                {
-                    breakpoint: 768,
-                    settings: {
-                        slidesToShow: 1
-                    }
-                },
-                {
-                    breakpoint: 980,
-                    settings: {
-                        slidesToShow: 2
-                    }
-                }
-            ]
-        });
+    initSlider("#lighthouses", {
+      autoplay: false,
+      prevArrow: "#lighthouse-wrapper .prev-wrapper",
+      nextArrow: "#lighthouse-wrapper .next-wrapper",
+      slidesToShow: 3,
+      infinite: true,
+      adaptiveHeight: true,
+      responsive: [
+        {
+          breakpoint: 768,
+          settings: {
+            slidesToShow: 1
+          }
+        },
+        {
+          breakpoint: 980,
+          settings: {
+            slidesToShow: 2
+          }
+        }
+      ]
+    });
   });
 };
 
@@ -271,33 +267,38 @@ var handleDeleteBtnClick = function() {
   });
 };
 
-function isUserInDatabase(user){
-    //console.log('running isUserInDatabase()');
-    API.getUser().then(function(response){
-        //console.log(response);
-        $('body').addClass('aficionado').removeClass('no-aficionado');
-        if (response.role === 'admin'){
-            $('body').addClass('admin');
-        }
-        $('#user-full-name').text(response.name);
-    }).catch(function(err){
-        if (err){
-            //console.log(err);
-            $('body').addClass('no-aficionado').removeClass('aficionado');
-        }
+function isUserInDatabase() {
+  //console.log('running isUserInDatabase()');
+  API.getUser()
+    .then(function(response) {
+      //console.log(response);
+      $("body")
+        .addClass("aficionado")
+        .removeClass("no-aficionado");
+      if (response.role === "admin") {
+        $("body").addClass("admin");
+      }
+      $("#user-full-name").text(response.name);
+    })
+    .catch(function(err) {
+      if (err) {
+        //console.log(err);
+        $("body")
+          .addClass("no-aficionado")
+          .removeClass("aficionado");
+      }
     });
-                
 }
 
-function checkFaveList(user){
-    API.getUserLists(user).then(function(response){
-        if (response.length === 0){
-            //console.log('no favorite lists');
-        } else {
-            // do something with the favorites list
-        }
-    })
-}
+// function checkFaveList(user) {
+//   API.getUserLists(user).then(function(response) {
+//     if (response.length === 0) {
+//       //console.log('no favorite lists');
+//     } else {
+//       // do something with the favorites list
+//     }
+//   });
+// }
 
 function initSlider(target, options) {
   $(target).slick(options);
@@ -338,15 +339,15 @@ $register.on("submit", function(event) {
   checkUser();
 });
 
-editButton.on('click',function(){
-    $('body').addClass('edit-mode');
-    editButton.hide();
-    noEdit.show();
+editButton.on("click", function() {
+  $("body").addClass("edit-mode");
+  editButton.hide();
+  noEdit.show();
 });
-noEdit.on('click',function(){
-    $('body').removeClass('edit-mode');
-    editButton.show();
-    noEdit.hide();
+noEdit.on("click", function() {
+  $("body").removeClass("edit-mode");
+  editButton.show();
+  noEdit.hide();
 });
 
 $login.on("submit", function(event) {
@@ -371,80 +372,81 @@ $lighthouse.on("submit", function(event) {
 });
 $lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
-$('#lighthouse-wrapper').on('click','.card .favorite i', function(){
-    // code to add a favorite to personal list
-    //console.log($(this));
-    let id = $(this).get(0).dataset.id;
-    API.modFavorites(id).then(function(){
-        showFavorites();
-    });
-    // Create a favorites list if not already a list fot this user/return list
-    // Add item to lighthouse favorites list
-
-    
+$("#lighthouse-wrapper").on("click", ".card .favorite i", function() {
+  // code to add a favorite to personal list
+  //console.log($(this));
+  let id = $(this).get(0).dataset.id;
+  API.modFavorites(id).then(function() {
+    showFavorites();
+  });
+  // Create a favorites list if not already a list fot this user/return list
+  // Add item to lighthouse favorites list
 });
 
-function showFavorites(){
-    //console.log('running showFavorites()');
-    if ($("#fav-lighthouse.slick-slider").length) {
-        initSlider("#fav-lighthouse", "unslick");
-        //console.log("#fav-lighthouse unslicked");
+function showFavorites() {
+  //console.log('running showFavorites()');
+  if ($("#fav-lighthouse.slick-slider").length) {
+    initSlider("#fav-lighthouse", "unslick");
+    //console.log("#fav-lighthouse unslicked");
+  }
+  API.getFavorites()
+    .then(function(response) {
+      var myLights = response[0].Lighthouses;
+      //console.log(myLights);
+      if (myLights.length === 0) {
+        $("body").addClass("no-fav");
+      } else {
+        $("body").removeClass("no-fav");
       }
-  API.getFavorites().then(function(response){
-    var myLights = response[0].Lighthouses;
-    //console.log(myLights);
-    if ((myLights).length === 0){
-        $('body').addClass('no-fav');
-    } else {
-        $('body').removeClass('no-fav');
-    }
-    $favLighthouse.empty();
-    for(var i =0; i < myLights.length; i++){
-      var $title =$("<h2>").text(myLights[i].name)
-      .attr("href", "/lighthouse/" + myLights[i].id);
-      var $pic = $("<img>").attr("src",myLights[i].image)
-      .addClass("card-img-top img-thumbnail")
-      .attr("alt", myLights[i].name);
-      var $discript = $("<p>").text(myLights[i].description)
-      .attr("class", "lh-desc text-center");
-      var yearBuilt =$("<li>")
-      .attr("class", "lh-spec year-built")
-      .text("Year Built: "+ myLights[i].yearBuilt);
-      var srvStart =$("<li>")
-      .attr("class", "lh-spec service-start")
-      .text("First year in service: "+ myLights[i].serviceYearStart);
-      var height =$("<li>")
-      .attr("class", "lh-spec service-end")
-      .text("Height: "+ myLights[i].height+" ft");
-      var local = $("<li>")
-      .attr("class","lh-spec state")
-      .text("State/Country: "+ myLights[i].locationState);
-      var list =$("<ul>")
-      .attr("class", "list")
-      .append(local)
-      .append(height)
-      .append(yearBuilt)
-      .append(srvStart)
-      var $card = $("<div>")
-      .attr({
-          class: "card",
-          "data-id": myLights[i].id
-        })
-        .append($pic)
-        .append($title)
-        .append($discript)
-        .append(list);
-        
+      $favLighthouse.empty();
+      for (var i = 0; i < myLights.length; i++) {
+        var $title = $("<h2>")
+          .text(myLights[i].name)
+          .attr("href", "/lighthouse/" + myLights[i].id);
+        var $pic = $("<img>")
+          .attr("src", myLights[i].image)
+          .addClass("card-img-top img-thumbnail")
+          .attr("alt", myLights[i].name);
+        var $discript = $("<p>")
+          .text(myLights[i].description)
+          .attr("class", "lh-desc text-center");
+        var yearBuilt = $("<li>")
+          .attr("class", "lh-spec year-built")
+          .text("Year Built: " + myLights[i].yearBuilt);
+        var srvStart = $("<li>")
+          .attr("class", "lh-spec service-start")
+          .text("First year in service: " + myLights[i].serviceYearStart);
+        var height = $("<li>")
+          .attr("class", "lh-spec service-end")
+          .text("Height: " + myLights[i].height + " ft");
+        var local = $("<li>")
+          .attr("class", "lh-spec state")
+          .text("State/Country: " + myLights[i].locationState);
+        var list = $("<ul>")
+          .attr("class", "list")
+          .append(local)
+          .append(height)
+          .append(yearBuilt)
+          .append(srvStart);
+        var $card = $("<div>")
+          .attr({
+            class: "card",
+            "data-id": myLights[i].id
+          })
+          .append($pic)
+          .append($title)
+          .append($discript)
+          .append(list);
+
         var $cardWrapper = $("<a>");
         $cardWrapper.append($card);
-        
-        
+
         $favLighthouse.append($card);
-    }
-    setTimeout(function(){
-      $("#fav-list .card").matchHeight();
-    },250)
-        initSlider("#fav-lighthouse", {
+      }
+      setTimeout(function() {
+        $("#fav-list .card").matchHeight();
+      }, 250);
+      initSlider("#fav-lighthouse", {
         autoplay: false,
         prevArrow: "#fav-list .prev-wrapper",
         nextArrow: "#fav-list .next-wrapper",
@@ -452,26 +454,23 @@ function showFavorites(){
         infinite: true,
         adaptiveHeight: true,
         responsive: [
-            {
-                breakpoint: 768,
-                settings: {
-                    slidesToShow: 1
-                }
-            },
-            {
-                breakpoint: 980,
-                settings: {
-                    slidesToShow: 2
-                }
+          {
+            breakpoint: 768,
+            settings: {
+              slidesToShow: 1
             }
+          },
+          {
+            breakpoint: 980,
+            settings: {
+              slidesToShow: 2
+            }
+          }
         ]
-        });
-    return $card;
-
-  }).catch(function(err){
-    $('body').addClass('no-fav');
-  });
-
+      });
+      return $card;
+    })
+    .catch(function() {
+      $("body").addClass("no-fav");
+    });
 }
-
-

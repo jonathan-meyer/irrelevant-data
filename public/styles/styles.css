@@ -1,43 +1,43 @@
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #ccdcee;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%23d9b662' fill-opacity='0.53' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background-color: #ccdcee;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 80' width='80' height='80'%3E%3Cpath fill='%23d9b662' fill-opacity='0.53' d='M14 16H9v-2h5V9.87a4 4 0 1 1 2 0V14h5v2h-5v15.95A10 10 0 0 0 23.66 27l-3.46-2 8.2-2.2-2.9 5a12 12 0 0 1-21 0l-2.89-5 8.2 2.2-3.47 2A10 10 0 0 0 14 31.95V16zm40 40h-5v-2h5v-4.13a4 4 0 1 1 2 0V54h5v2h-5v15.95A10 10 0 0 0 63.66 67l-3.47-2 8.2-2.2-2.88 5a12 12 0 0 1-21.02 0l-2.88-5 8.2 2.2-3.47 2A10 10 0 0 0 54 71.95V56zm-39 6a2 2 0 1 1 0-4 2 2 0 0 1 0 4zm40-40a2 2 0 1 1 0-4 2 2 0 0 1 0 4zM15 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm40 40a2 2 0 1 0 0-4 2 2 0 0 0 0 4z'%3E%3C/path%3E%3C/svg%3E");
 }
 
 .jumbotron {
-    background: darkslategray;
-    color: aliceblue;
-    border: 3px solid firebrick;
-    border-radius: 25px;
-    margin: 10px;
+  background: darkslategray;
+  color: aliceblue;
+  border: 3px solid firebrick;
+  border-radius: 25px;
+  margin: 10px;
 }
-.display-4{
-    font-size: 45px;
-    font-weight: bold;
+.display-4 {
+  font-size: 45px;
+  font-weight: bold;
 }
 #header {
-    background: darkslategray;
-    color: aliceblue;
-    text-align: center;
-    padding: 5px;
-    border-radius: 25px;
-    border: 3px solid firebrick;
-    margin: 15px;
+  background: darkslategray;
+  color: aliceblue;
+  text-align: center;
+  padding: 5px;
+  border-radius: 25px;
+  border: 3px solid firebrick;
+  margin: 15px;
 }
-#database-head{
-    background: darkslategray;
-    color: aliceblue;
-    text-align: center;
-    padding: 5px;
-    border-radius: 25px;
-    border:  3px solid firebrick;
-    margin: 15px;
+#database-head {
+  background: darkslategray;
+  color: aliceblue;
+  text-align: center;
+  padding: 5px;
+  border-radius: 25px;
+  border: 3px solid firebrick;
+  margin: 15px;
 }
-.card{
-    width: 200px;
-    border: 2px solid firebrick;
-    padding: 3px;
-    margin: 5px;
+.card {
+  width: 200px;
+  border: 2px solid firebrick;
+  padding: 3px;
+  margin: 5px;
 }
 
 .list-group-item {
@@ -50,120 +50,124 @@ body {
   float: left;
 }
 .app-login img {
-    max-width: 50%;
+  max-width: 50%;
 }
 .app-login a {
-    text-decoration: none;
+  text-decoration: none;
 }
-.no-aficionado #add-lh-btn, 
+.no-aficionado #add-lh-btn,
 .no-aficionado #log-out,
 .no-aficionado #edit-wrapper,
 .no-aficionado .favorite,
 .no-aficionado #greeting {
-    display: none;
+  display: none;
 }
 .aficionado #log-out {
-    display: inline;
+  display: inline;
 }
 .aficionado #greeting {
-    display: block;
-    margin-left: 20px;
+  display: block;
+  margin-left: 20px;
 }
-.aficionado #log-in, .aficionado #register {
-    display: none;
-} 
+.aficionado #log-in,
+.aficionado #register {
+  display: none;
+}
 #lighthouses {
-    display: flex;
+  display: flex;
 }
 #lighthouses .card {
-    position: relative;
+  position: relative;
 }
 #lighthouses .favorite {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    opacity: 0;
-    transition: opacity .5s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  opacity: 0;
+  transition: opacity 0.5s ease;
 }
 #lighthouses .card:hover .favorite,
 #lighthouse-wrapper:hover .slick-arrow,
 #fav-list:hover .slick-arrow {
-    opacity: 1;
+  opacity: 1;
 }
 .card .favorite:hover {
-    cursor: pointer;
+  cursor: pointer;
 }
 .card .favorite i {
-    color: #000;
-    background: #fff;
-    padding: 1px;
-    padding: 2px 0 0 3px;
-    padding-right: 2px;
-    padding-bottom: 1px;
+  color: #000;
+  background: #fff;
+  padding: 1px;
+  padding: 2px 0 0 3px;
+  padding-right: 2px;
+  padding-bottom: 1px;
 }
-#lighthouse-wrapper .prev-wrapper, #lighthouse-wrapper .next-wrapper,
-#fav-list .prev-wrapper, #fav-list .next-wrapper {
-    position: absolute;
-    top: 50%;
-    height: 30px;
-    margin-top: -15px;
-    z-index: 1;
-    font-size: 35px;
-    color: #fff;
-    padding: 0 5px;
+#lighthouse-wrapper .prev-wrapper,
+#lighthouse-wrapper .next-wrapper,
+#fav-list .prev-wrapper,
+#fav-list .next-wrapper {
+  position: absolute;
+  top: 50%;
+  height: 30px;
+  margin-top: -15px;
+  z-index: 1;
+  font-size: 35px;
+  color: #fff;
+  padding: 0 5px;
 }
-.prev-wrapper:hover, .next-wrapper:hover {
-    cursor: pointer;
+.prev-wrapper:hover,
+.next-wrapper:hover {
+  cursor: pointer;
 }
 #lighthouse-wrapper .prev-wrapper {
-    left: 15px;
+  left: 15px;
 }
 #lighthouse-wrapper .next-wrapper,
 #fav-list .next-wrapper {
-    right: 15px;
-
+  right: 15px;
 }
 #edit-wrapper {
-    position: absolute;
-    bottom: 15px;
-    left: 15px;
-    display: none;
+  position: absolute;
+  bottom: 15px;
+  left: 15px;
+  display: none;
 }
 .admin #edit-wrapper {
-    display: block;
+  display: block;
 }
-.delete, #no-edit {
-    display: none;
+.delete,
+#no-edit {
+  display: none;
 }
 .edit-mode .delete {
-    display: block;
-    position: absolute;
-    top: 10px;
-    left: 10px;
+  display: block;
+  position: absolute;
+  top: 10px;
+  left: 10px;
 }
 body {
-    position: relative;
+  position: relative;
 }
 .slick-arrow {
-    text-shadow: 0px 1px 10px grey;
-    opacity: 0;
+  text-shadow: 0px 1px 10px grey;
+  opacity: 0;
 }
 .img-thumbnail {
-    width: 150px;
-    text-align: center;
-    width: 200px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+  width: 150px;
+  text-align: center;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 .navbar #search-form {
-    display: none;
+  display: none;
 }
 #fav-list {
-    padding: 0;
-    position: relative;
+  padding: 0;
+  position: relative;
 }
 .no-fav #fav-list .slick-arrow,
 .no-fav #fav-list .arrow {
-    display: none;
+  display: none;
 }
