@@ -57,7 +57,8 @@ body {
 }
 .no-aficionado #add-lh-btn, 
 .no-aficionado #log-out,
-.no-aficionado #edit-wrapper {
+.no-aficionado #edit-wrapper,
+.no-aficionado .favorite {
     display: none;
 }
 .aficionado #log-out {
@@ -118,12 +119,19 @@ body {
     position: absolute;
     bottom: 15px;
     left: 15px;
+    display: none;
+}
+.admin #edit-wrapper {
+    display: block;
 }
 .delete, #no-edit {
     display: none;
 }
 .edit-mode .delete {
     display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 body {
     position: relative;
