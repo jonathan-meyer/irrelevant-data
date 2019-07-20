@@ -256,32 +256,16 @@ function isUserInDatabase(user){
     API.getUser().then(function(response){
         console.log(response);
         $('body').addClass('aficionado').removeClass('no-aficionado');
+        if (response.role === 'admin'){
+            $('body').addClass('admin');j
+        }
     }).catch(function(err){
         if (err){
             console.log(err);
             $('body').addClass('no-aficionado').removeClass('aficionado');
         }
     });
-                // API.getUsers(user.email).then(function(response){
-                //     console.log(response);
-                //     if (response.length === 0){
-                //         ;
-                //     }
-                //     for (i=0;i<response.length;i++){
-                //         if (user.email === response[i].email && user.token === response[i].token){
-                //             console.log("User matched");
-                //             isUser = true;
-                //             console.log(response[i]);
-                //             $('#username-container').text(`Hello, ${response[i].name}`);
-                //             $('body').addClass('aficionado');
-                //             $('body').removeClass('no-aficionado');
-                //             localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
-                //         } else {
-                //             console.log('user not in database');
-                //             alert("We're sorry, the username or password you entered was incorrect.");
-                //         }
-                //     }
-                // });
+                
 }
 
 function checkFaveList(user){
