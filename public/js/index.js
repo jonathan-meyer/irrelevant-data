@@ -257,8 +257,9 @@ function isUserInDatabase(user){
         console.log(response);
         $('body').addClass('aficionado').removeClass('no-aficionado');
         if (response.role === 'admin'){
-            $('body').addClass('admin');j
+            $('body').addClass('admin');
         }
+        $('#user-full-name').text(response.name);
     }).catch(function(err){
         if (err){
             console.log(err);

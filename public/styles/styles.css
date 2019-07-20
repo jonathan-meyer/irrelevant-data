@@ -58,11 +58,16 @@ body {
 .no-aficionado #add-lh-btn, 
 .no-aficionado #log-out,
 .no-aficionado #edit-wrapper,
-.no-aficionado .favorite {
+.no-aficionado .favorite,
+.no-aficionado #greeting {
     display: none;
 }
 .aficionado #log-out {
     display: inline;
+}
+.aficionado #greeting {
+    display: block;
+    margin-left: 20px;
 }
 .aficionado #log-in, .aficionado #register {
     display: none;
