@@ -8,7 +8,9 @@
     "dev": "nodemon server.js",
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
-    "test": "mocha",
+    "mocha": "cross-env NODE_ENV=test mocha --reporter spec --exit",
+    "jest": "jest",
+    "test": "npm run lint && npm run jest",
     "sync": "node data/syncDB.js"
   },
   "license": "ISC",
@@ -35,6 +37,7 @@
     "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.3.0",
     "eslint-plugin-prettier": "^3.1.0",
+    "jest": "^24.8.0",
     "mocha": "^6.1.4",
     "nodemon": "^1.19.1",
     "prettier": "^1.17.1"

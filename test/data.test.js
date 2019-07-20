@@ -1,67 +1,69 @@
 require("dotenv").config();
 
-const expect = require("chai").expect;
 const db = require("../models");
 
 describe("database", function() {
-  it("add lighthouse and faviorate list", function() {
-    Promise.all([
+  beforeAll(done => {
+    db.sequelize.sync({ force: true }).then(() => {
+      done();
+    });
+  });
+
+  it("create a user", () => {
+    return expect(
       db.User.findOrCreate({
-        where: { provider: "test", token: "test-barny3" },
+        where: { provider: "test", token: "test-1234" },
         defaults: {
-          name: "Barny",
+          name: "Fred Flintstone",
           provider: "test",
-          token: "test-barny3"
+          token: "test-1234"
         },
         include: [db.Lighthouse, db.FavoriteList]
-      }),
+      })
+    ).resolves.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "Fred Flintstone",
+          provider: "test",
+          token: "test-1234"
+        })
+      ])
+    );
+  });
+
+  it("create a lighthouse", () => {
+    return expect(
       db.Lighthouse.findOrCreate({
-        where: { name: "test" },
+        where: { name: "Fred's Cool Lighthouse" },
         defaults: {
-          name: "test"
+          name: "Fred's Cool Lighthouse"
         },
         include: [db.User, db.FavoriteList]
-      }),
+      })
+    ).resolves.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "Fred's Cool Lighthouse"
+        })
+      ])
+    );
+  });
+
+  it("create a list", () => {
+    return expect(
       db.FavoriteList.findOrCreate({
-        where: { name: "My List" },
+        where: { name: "Fred's List" },
         defaults: {
-          name: "My List",
-          owner: "Fred"
+          name: "Fred's List"
         },
         include: [db.User, db.Lighthouse]
       })
-    ])
-      .then(data => {
-        const [[user], [lighthouse], [list]] = data;
-
-        Promise.all([
-          user.addLighthouse(lighthouse).then(() => {
-            console.log("Lighthouse added to User");
-          }),
-          user.addFavoriteList(list).then(() => {
-            console.log(">>> List added to User");
-          }),
-          list.addLighthouse(lighthouse).then(() => {
-            console.log(">>> lighthouse added to my list");
-          })
-        ]).then(() => {
-          list.reload().then(list => {
-            console.log("list", list.get());
-          });
-
-          user.reload().then(user => {
-            console.log("user", user.get());
-          });
-
-          lighthouse.reload().then(lighthouse => {
-            console.log("lighthouse", lighthouse.get());
-          });
-        });
-      })
-      .catch(err => {
-        console.log("error", err);
-      });
-
-    expect(true).to.be.true;
+    ).resolves.toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          name: "Fred's List"
+        })
+      ])
+    );
   });
 });
