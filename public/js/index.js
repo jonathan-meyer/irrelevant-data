@@ -151,7 +151,7 @@ var refreshExamples = function() {
     $lighthouses.append($examples);
     setTimeout(function(){
         $('.card').matchHeight();
-    }, 100)
+    }, 250)
     initSlider("#lighthouses", {
       autoplay: false,
       prevArrow: ".prev-wrapper",
@@ -269,32 +269,17 @@ function isUserInDatabase(user){
     API.getUser().then(function(response){
         console.log(response);
         $('body').addClass('aficionado').removeClass('no-aficionado');
+        if (response.role === 'admin'){
+            $('body').addClass('admin');
+        }
+        $('#user-full-name').text(response.name);
     }).catch(function(err){
         if (err){
             console.log(err);
             $('body').addClass('no-aficionado').removeClass('aficionado');
         }
     });
-                // API.getUsers(user.email).then(function(response){
-                //     console.log(response);
-                //     if (response.length === 0){
-                //         ;
-                //     }
-                //     for (i=0;i<response.length;i++){
-                //         if (user.email === response[i].email && user.token === response[i].token){
-                //             console.log("User matched");
-                //             isUser = true;
-                //             console.log(response[i]);
-                //             $('#username-container').text(`Hello, ${response[i].name}`);
-                //             $('body').addClass('aficionado');
-                //             $('body').removeClass('no-aficionado');
-                //             localStorage.setItem("lighthouseAffUser",JSON.stringify(user));
-                //         } else {
-                //             console.log('user not in database');
-                //             alert("We're sorry, the username or password you entered was incorrect.");
-                //         }
-                //     }
-                // });
+                
 }
 
 function checkFaveList(user){
@@ -379,12 +364,13 @@ $lighthouse.on("submit", function(event) {
 });
 $lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
-$('#lighthouse-wrapper').on('click','.card i', function(){
+$('#lighthouse-wrapper').on('click','.card .favorite i', function(){
     // code to add a favorite to personal list
     console.log($(this));
-    let id = $(this.get(0).dataset.id);
+    let id = $(this).get(0).dataset.id;
     // Create a favorites list if not already a list fot this user/return list
     // Add item to lighthouse favorites list
+
     
 });
 
@@ -465,6 +451,9 @@ function showFavorites(){
     ]
   });
 }
+
+});
+
 
 showFavorites();
 

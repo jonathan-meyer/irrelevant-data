@@ -57,11 +57,17 @@ body {
 }
 .no-aficionado #add-lh-btn, 
 .no-aficionado #log-out,
-.no-aficionado #edit-wrapper {
+.no-aficionado #edit-wrapper,
+.no-aficionado .favorite,
+.no-aficionado #greeting {
     display: none;
 }
 .aficionado #log-out {
     display: inline;
+}
+.aficionado #greeting {
+    display: block;
+    margin-left: 20px;
 }
 .aficionado #log-in, .aficionado #register {
     display: none;
@@ -118,12 +124,19 @@ body {
     position: absolute;
     bottom: 15px;
     left: 15px;
+    display: none;
+}
+.admin #edit-wrapper {
+    display: block;
 }
 .delete, #no-edit {
     display: none;
 }
 .edit-mode .delete {
     display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
 }
 body {
     position: relative;
