@@ -366,12 +366,12 @@ $lighthouse.on("submit", function(event) {
 });
 $lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
-$('#lighthouse-wrapper').on('click','.card i', function(){
+$('#lighthouse-wrapper').on('click','.card .favorite i', function(){
     // code to add a favorite to personal list
     console.log($(this));
-    let id = $(this.get(0).dataset.id);
+    let id = $(this).get(0).dataset.id;
     // Create a favorites list if not already a list fot this user/return list
     // Add item to lighthouse favorites list
-})
+});
 
 
