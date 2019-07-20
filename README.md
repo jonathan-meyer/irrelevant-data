@@ -10,7 +10,7 @@ Lighthouse Aficionado is an application that provides information about lighthou
 
 ### **Video Guide**
 
-Watch the video here: https://www.youtube.com/watch?v=yuDc2vBKz3k
+Watch the video here: https://www.youtube.com/watch?v=JzIFBoVlGUs
 
 ### **Step by Step instructions**
 
@@ -20,6 +20,8 @@ Watch the video here: https://www.youtube.com/watch?v=yuDc2vBKz3k
 4. Utilize Google or Facebook single-sign-on.
 5. Navigate to the 'Lighthouse Database' section and click 'Add Lighthouse to Database'.
 6. Add a value to relevant fields (at minimal, Name, Description, Lighthouse Picture and In Service?) and click 'Save Changes'.
+7. Click the '+' icon on the lighthouse to add a lighthouse to your favorites list.
+8. Click 'Logout'.
 
 ## Technologies Used
 
