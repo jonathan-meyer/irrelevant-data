@@ -14,7 +14,7 @@ var $favLighthouse = $("#fav-lighthouse")
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
-    console.log("API.saveExample() running");
+    //console.log("API.saveExample() running");
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -63,7 +63,7 @@ var API = {
       url: "/api/user/new",
       data: JSON.stringify(user)
     }).then(function(response) {
-      console.log(response);
+      //console.log(response);
     });
   },
   getUsers: function(email) {
@@ -91,7 +91,7 @@ var refreshExamples = function() {
     showFavorites();
   if ($("#lighthouses.slick-slider").length) {
     initSlider("#lighthouses", "unslick");
-    console.log("#lighthouses unslicked");
+    //console.log("#lighthouses unslicked");
   }
   API.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
@@ -158,36 +158,36 @@ var refreshExamples = function() {
     $lighthouses.append($examples);
     setTimeout(function(){
         $('#lighthouse-wrapper .card').matchHeight();
-    }, 250)
-    initSlider("#lighthouses", {
-      autoplay: false,
-      prevArrow: "#lighthouse-wrapper .prev-wrapper",
-      nextArrow: "#lighthouse-wrapper .next-wrapper",
-      slidesToShow: 3,
-      infinite: true,
-      adaptiveHeight: true,
-      responsive: [
-          {
-              breakpoint: 768,
-              settings: {
-                  slidesToShow: 1
-              }
-          },
-          {
-              breakpoint: 980,
-              settings: {
-                  slidesToShow: 2
-              }
-          }
-      ]
-    });
+    }, 250);
+        initSlider("#lighthouses", {
+            autoplay: false,
+            prevArrow: "#lighthouse-wrapper .prev-wrapper",
+            nextArrow: "#lighthouse-wrapper .next-wrapper",
+            slidesToShow: 3,
+            infinite: true,
+            adaptiveHeight: true,
+            responsive: [
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 1
+                    }
+                },
+                {
+                    breakpoint: 980,
+                    settings: {
+                        slidesToShow: 2
+                    }
+                }
+            ]
+        });
   });
 };
 
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function() {
-  console.log("form submitted");
+  //console.log("form submitted");
 
   // var example = {
   //   text: "test",
@@ -272,9 +272,9 @@ var handleDeleteBtnClick = function() {
 };
 
 function isUserInDatabase(user){
-    console.log('running isUserInDatabase()');
+    //console.log('running isUserInDatabase()');
     API.getUser().then(function(response){
-        console.log(response);
+        //console.log(response);
         $('body').addClass('aficionado').removeClass('no-aficionado');
         if (response.role === 'admin'){
             $('body').addClass('admin');
@@ -282,7 +282,7 @@ function isUserInDatabase(user){
         $('#user-full-name').text(response.name);
     }).catch(function(err){
         if (err){
-            console.log(err);
+            //console.log(err);
             $('body').addClass('no-aficionado').removeClass('aficionado');
         }
     });
@@ -292,7 +292,7 @@ function isUserInDatabase(user){
 function checkFaveList(user){
     API.getUserLists(user).then(function(response){
         if (response.length === 0){
-            console.log('no favorite lists');
+            //console.log('no favorite lists');
         } else {
             // do something with the favorites list
         }
@@ -334,7 +334,7 @@ $register.on("submit", function(event) {
   $("#registration-modal").modal("hide");
   localStorage.setItem("lighthouseAffUser", JSON.stringify(user));
   API.addUser(user);
-  console.log(user);
+  //console.log(user);
   checkUser();
 });
 
@@ -365,7 +365,7 @@ $login.on("submit", function(event) {
 
 // Add event listeners to the submit and delete buttons
 $lighthouse.on("submit", function(event) {
-  console.log("form submitted");
+  //console.log("form submitted");
   event.preventDefault();
   handleFormSubmit();
 });
@@ -373,7 +373,7 @@ $lighthouses.on("click", ".delete", handleDeleteBtnClick);
 
 $('#lighthouse-wrapper').on('click','.card .favorite i', function(){
     // code to add a favorite to personal list
-    console.log($(this));
+    //console.log($(this));
     let id = $(this).get(0).dataset.id;
     API.modFavorites(id).then(function(){
         showFavorites();
@@ -385,14 +385,14 @@ $('#lighthouse-wrapper').on('click','.card .favorite i', function(){
 });
 
 function showFavorites(){
-    console.log('running showFavorites()');
+    //console.log('running showFavorites()');
     if ($("#fav-lighthouse.slick-slider").length) {
         initSlider("#fav-lighthouse", "unslick");
-        console.log("#fav-lighthouse unslicked");
+        //console.log("#fav-lighthouse unslicked");
       }
   API.getFavorites().then(function(response){
     var myLights = response[0].Lighthouses;
-    console.log(myLights);
+    //console.log(myLights);
     if ((myLights).length === 0){
         $('body').addClass('no-fav');
     } else {
@@ -444,28 +444,28 @@ function showFavorites(){
     setTimeout(function(){
       $("#fav-list .card").matchHeight();
     },250)
-    initSlider("#fav-lighthouse", {
-      autoplay: false,
-      prevArrow: "#fav-list .prev-wrapper",
-      nextArrow: "#fav-list .next-wrapper",
-      slidesToShow: 3,
-      infinite: true,
-      adaptiveHeight: true,
-      responsive: [
-          {
-              breakpoint: 768,
-              settings: {
-                  slidesToShow: 1
-              }
-          },
-          {
-              breakpoint: 980,
-              settings: {
-                  slidesToShow: 2
-              }
-          }
-      ]
-    });
+        initSlider("#fav-lighthouse", {
+        autoplay: false,
+        prevArrow: "#fav-list .prev-wrapper",
+        nextArrow: "#fav-list .next-wrapper",
+        slidesToShow: 3,
+        infinite: true,
+        adaptiveHeight: true,
+        responsive: [
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1
+                }
+            },
+            {
+                breakpoint: 980,
+                settings: {
+                    slidesToShow: 2
+                }
+            }
+        ]
+        });
     return $card;
 
   }).catch(function(err){
