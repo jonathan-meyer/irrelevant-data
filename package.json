@@ -9,7 +9,7 @@
     "lint": "eslint --quiet .",
     "fix": "eslint --fix .",
     "mocha": "cross-env NODE_ENV=test mocha --reporter spec --exit",
-    "jest": "jest",
+    "jest": "cross-env NODE_ENV=test jest --forceExit --detectOpenHandles",
     "test": "npm run lint && npm run jest",
     "sync": "node data/syncDB.js"
   },
