@@ -9,6 +9,7 @@ var $login = $("#login-form");
 var $register = $("#registration-form");
 var editButton = $('#edit');
 var noEdit = $('#no-edit');
+var $favLighthouse = $("#fav-lighthouse")
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -33,6 +34,18 @@ var API = {
     return $.ajax({
       url: "/api/lighthouses/" + id,
       type: "DELETE"
+    });
+  },
+  getFavorites:function(){
+    return $.ajax({
+      url: "/api/users/favorites",
+      type: "GET"
+    });
+  },
+  modFavorites: function(id){
+    return $.ajax({
+      url: "/api/users/favorites",
+      type: "PUT"
     });
   },
   addUser: function(user) {
@@ -357,6 +370,90 @@ $('#lighthouse-wrapper').on('click','.card .favorite i', function(){
     let id = $(this).get(0).dataset.id;
     // Create a favorites list if not already a list fot this user/return list
     // Add item to lighthouse favorites list
+
+    
 });
 
+function showFavorites(){
+  API.getFavorites().then(function(response){
+    
+    var myLights = response[0].Lighthouses;
+    console.log(myLights);
+    for(var i =0; i < myLights.length; i++){
+      var $title =$("<h2").text(myLights[i].name)
+      .attr("href", "/lighthouse/" + myLights[i].id);
+      var $pic = $("<img>").attr("src",myLights[i].image)
+      .addClass("card-img-top img-thumbnail")
+      attr("alt", myLights[i].name);
+      var $discript = $("<p>").text(myLights[i].description)
+      .attr("class", "lh-desc text-center");
+      var yearBuilt =$("<li>")
+      .attr("class", "lh-spec year-built")
+      .text("Year Built: "+ myLights[i].yearBuilt);
+      var srvStart =$("<li>")
+      .attr("class", "lh-spec service-start")
+      .text("First year in service: "+ myLights[i].serviceYearStart);
+      var height =$("<li>")
+      .attr("class", "lh-spec service-end")
+      .text("Height: "+ myLights[i].height+" ft");
+      var local = $("<li>")
+      .attr("class","lh-spec state")
+      .text("State/Country: "+ myLights[i].locationState);
+      var list =$("<ul>")
+      .attr("class", "list")
+      .append(local)
+      .append(height)
+      .append(yearBuilt)
+      .append(srvStart)
+    }
+    var $card = $("<div>")
+    .attr({
+      class: "card",
+      "data-id": myLights[i].id
+    })
+    .append($pic)
+    .append($title)
+    .append($discript)
+    .append(list);
+
+    var $cardWrapper = $("<a>");
+    $cardWrapper.append($card);
+
+    return $card;
+
+  });
+
+  $favLighthouse.empty();
+  $favLighthouse.append($card);
+  setTimeout(function(){
+    $(".card").matchHeight();
+  },100)
+  initSlider("#lighthouses", {
+    autoplay: false,
+    prevArrow: ".prev-wrapper",
+    nextArrow: ".next-wrapper",
+    slidesToShow: 3,
+    infinite: true,
+    adaptiveHeight: true,
+    responsive: [
+        {
+            breakpoint: 768,
+            settings: {
+                slidesToShow: 1
+            }
+        },
+        {
+            breakpoint: 980,
+            settings: {
+                slidesToShow: 2
+            }
+        }
+    ]
+  });
+}
+
+});
+
+
+showFavorites();
 
