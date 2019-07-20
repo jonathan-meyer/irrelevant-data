@@ -86,7 +86,8 @@ body {
     transition: opacity .5s ease;
 }
 #lighthouses .card:hover .favorite,
-#lighthouse-wrapper:hover .slick-arrow {
+#lighthouse-wrapper:hover .slick-arrow,
+#fav-list:hover .slick-arrow {
     opacity: 1;
 }
 .card .favorite:hover {
@@ -100,7 +101,8 @@ body {
     padding-right: 2px;
     padding-bottom: 1px;
 }
-#lighthouse-wrapper .prev-wrapper, #lighthouse-wrapper .next-wrapper {
+#lighthouse-wrapper .prev-wrapper, #lighthouse-wrapper .next-wrapper,
+#fav-list .prev-wrapper, #fav-list .next-wrapper {
     position: absolute;
     top: 50%;
     height: 30px;
@@ -116,7 +118,8 @@ body {
 #lighthouse-wrapper .prev-wrapper {
     left: 15px;
 }
-#lighthouse-wrapper .next-wrapper {
+#lighthouse-wrapper .next-wrapper,
+#fav-list .next-wrapper {
     right: 15px;
 
 }
@@ -154,5 +157,13 @@ body {
     margin-right: auto;
 }
 .navbar #search-form {
+    display: none;
+}
+#fav-list {
+    padding: 0;
+    position: relative;
+}
+.no-fav #fav-list .slick-arrow,
+.no-fav #fav-list .arrow {
     display: none;
 }
