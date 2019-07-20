@@ -57,7 +57,8 @@ body {
 }
 .no-aficionado #add-lh-btn, 
 .no-aficionado #log-out,
-.no-aficionado #edit-wrapper {
+.no-aficionado #edit-wrapper,
+.no-aficionado .favorite {
     display: none;
 }
 .aficionado #log-out {
